@@ -1,0 +1,482 @@
+{
+    "name": "pl_bronze_to_silver",
+    "properties": {
+        "activities": [
+            {
+                "name": "silver mcc codes",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/03_silver/silver_mcc_codes"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "silver products",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/03_silver/silver_products"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "silver branches",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/03_silver/silver_branches"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "silver merchants",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/03_silver/silver_merchants"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "silver counterparties",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/03_silver/silver_counterparties"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "silver customers",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "silver products",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "silver branches",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "silver merchants",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "silver counterparties",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "silver mcc codes",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "silver fx_rates",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/03_silver/silver_customers"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "silver accounts",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "silver customers",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/03_silver/silver_accounts"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "silver transactions",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "silver accounts",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/03_silver/silver_transactions"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "silver settlements",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "silver transactions",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/03_silver/silver_settlements"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "silver disputes",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "silver transactions",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/03_silver/silver_disputes"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "silver fx_rates",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/03_silver/silver_fx_rates"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "Fail - silver mcc codes",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "silver mcc codes",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "Notebook silver mcc codes failed",
+                    "errorCode": "NOTEBOOK_FAILED"
+                }
+            },
+            {
+                "name": "Fail - silver products",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "silver products",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "Notebook silver products",
+                    "errorCode": "NOTEBOOK_FAILED"
+                }
+            },
+            {
+                "name": "Fail - silver branches",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "silver branches",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "Notebook silver branches",
+                    "errorCode": "NOTEBOOK_FAILED"
+                }
+            },
+            {
+                "name": "Fail - silver merchants",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "silver merchants",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "Notebook silver merchants",
+                    "errorCode": "NOTEBOOK_FAILED"
+                }
+            },
+            {
+                "name": "Fail - silver counterparties",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "silver counterparties",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "Notebook silver counterparties",
+                    "errorCode": "NOTEBOOK_FAILED"
+                }
+            },
+            {
+                "name": "Fail - silver fx rates",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "silver fx_rates",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "Notebook silver fx rates",
+                    "errorCode": "NOTEBOOK_FAILED"
+                }
+            },
+            {
+                "name": "Fail - silver customers",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "silver customers",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "Notebook silver customers",
+                    "errorCode": "NOTEBOOK_FAILED"
+                }
+            },
+            {
+                "name": "Fail - silver accounts",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "silver accounts",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "Notebook silver accounts",
+                    "errorCode": "NOTEBOOK_FAILED"
+                }
+            },
+            {
+                "name": "Fail - silver transactions",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "silver transactions",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "Notebook silver transactions",
+                    "errorCode": "NOTEBOOK_FAILED"
+                }
+            },
+            {
+                "name": "Fail - silver settlements",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "silver settlements",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "Notebook silver settlements",
+                    "errorCode": "NOTEBOOK_FAILED"
+                }
+            },
+            {
+                "name": "Fail - silver disputes",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "silver disputes",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "Notebook silver disputes",
+                    "errorCode": "NOTEBOOK_FAILED"
+                }
+            }
+        ],
+        "annotations": [],
+        "lastPublishTime": "2026-02-13T15:20:23Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

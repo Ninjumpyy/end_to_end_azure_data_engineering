@@ -1,0 +1,600 @@
+{
+    "name": "pl_flat_files_copy_bronze",
+    "properties": {
+        "activities": [
+            {
+                "name": "audit_start Flat File",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/01_audit/audit_start",
+                    "baseParameters": {
+                        "run_id": {
+                            "value": "@pipeline().parameters.run_id",
+                            "type": "Expression"
+                        },
+                        "pipeline_name": {
+                            "value": "@pipeline().parameters.pipeline_name",
+                            "type": "Expression"
+                        },
+                        "layer": {
+                            "value": "@pipeline().parameters.layer",
+                            "type": "Expression"
+                        },
+                        "source_type": {
+                            "value": "@pipeline().parameters.source_type",
+                            "type": "Expression"
+                        },
+                        "source_system": {
+                            "value": "@pipeline().parameters.source_system",
+                            "type": "Expression"
+                        },
+                        "source_object": {
+                            "value": "@pipeline().parameters.source_object",
+                            "type": "Expression"
+                        },
+                        "target_object": {
+                            "value": "@pipeline().parameters.target_object",
+                            "type": "Expression"
+                        },
+                        "load_mode": {
+                            "value": "@pipeline().parameters.load_mode",
+                            "type": "Expression"
+                        },
+                        "watermark_column": {
+                            "value": "@pipeline().parameters.watermark_column",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "Get Metadata Bronze Flat File",
+                "type": "GetMetadata",
+                "dependsOn": [
+                    {
+                        "activity": "audit_start Flat File",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataset": {
+                        "referenceName": "generic_adls_parquet_ds",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "container": {
+                                "value": "@pipeline().parameters.target_container",
+                                "type": "Expression"
+                            },
+                            "file_path": {
+                                "value": "@pipeline().parameters.target_path",
+                                "type": "Expression"
+                            },
+                            "file_name": {
+                                "value": "@concat(pipeline().parameters.target_file_name,'.parquet')",
+                                "type": "Expression"
+                            }
+                        }
+                    },
+                    "fieldList": [
+                        "exists"
+                    ],
+                    "storeSettings": {
+                        "type": "AzureBlobStorageReadSettings",
+                        "recursive": true,
+                        "enablePartitionDiscovery": false
+                    },
+                    "formatSettings": {
+                        "type": "ParquetReadSettings"
+                    }
+                }
+            },
+            {
+                "name": "audit_start Flat Files failed",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "audit_start Flat File",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "audit_start Flat Files failed – ingestion stopped",
+                    "errorCode": "AUDIT_START_FAILED"
+                }
+            },
+            {
+                "name": "If Flat File Parquet Exists",
+                "type": "IfCondition",
+                "dependsOn": [
+                    {
+                        "activity": "Get Metadata Bronze Flat File",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "expression": {
+                        "value": "@activity('Get Metadata Bronze Flat File').output.exists",
+                        "type": "Expression"
+                    },
+                    "ifTrueActivities": [
+                        {
+                            "name": "Archive Bronze Flat File",
+                            "type": "Copy",
+                            "dependsOn": [],
+                            "policy": {
+                                "timeout": "0.12:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "source": {
+                                    "type": "ParquetSource",
+                                    "storeSettings": {
+                                        "type": "AzureBlobFSReadSettings",
+                                        "recursive": true,
+                                        "enablePartitionDiscovery": false
+                                    },
+                                    "formatSettings": {
+                                        "type": "ParquetReadSettings"
+                                    }
+                                },
+                                "sink": {
+                                    "type": "ParquetSink",
+                                    "storeSettings": {
+                                        "type": "AzureBlobFSWriteSettings"
+                                    },
+                                    "formatSettings": {
+                                        "type": "ParquetWriteSettings"
+                                    }
+                                },
+                                "enableStaging": false,
+                                "translator": {
+                                    "type": "TabularTranslator",
+                                    "typeConversion": true,
+                                    "typeConversionSettings": {
+                                        "allowDataTruncation": true,
+                                        "treatBooleanAsNumber": false
+                                    }
+                                }
+                            },
+                            "inputs": [
+                                {
+                                    "referenceName": "generic_adls_parquet_ds",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "container": {
+                                            "value": "@pipeline().parameters.target_container",
+                                            "type": "Expression"
+                                        },
+                                        "file_path": {
+                                            "value": "@pipeline().parameters.target_path",
+                                            "type": "Expression"
+                                        },
+                                        "file_name": {
+                                            "value": "@concat(pipeline().parameters.target_file_name,'.parquet')",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                }
+                            ],
+                            "outputs": [
+                                {
+                                    "referenceName": "generic_adls_parquet_ds",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "container": {
+                                            "value": "@pipeline().parameters.target_container",
+                                            "type": "Expression"
+                                        },
+                                        "file_path": {
+                                            "value": "@concat('archive/',pipeline().parameters.target_path)",
+                                            "type": "Expression"
+                                        },
+                                        "file_name": {
+                                            "value": "@concat(pipeline().parameters.target_file_name,'_',formatDateTime(utcNow(),'yyyyMMddmm'),'.parquet')",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Delete Bronze Flat File",
+                            "type": "Delete",
+                            "dependsOn": [
+                                {
+                                    "activity": "Archive Bronze Flat File",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "policy": {
+                                "timeout": "0.12:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "dataset": {
+                                    "referenceName": "generic_adls_parquet_ds",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "container": "@pipeline().parameters.target_container",
+                                        "file_path": "@pipeline().parameters.target_path",
+                                        "file_name": {
+                                            "value": "@concat(pipeline().parameters.target_file_name,'.parquet')",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                },
+                                "enableLogging": false,
+                                "storeSettings": {
+                                    "type": "AzureBlobStorageReadSettings",
+                                    "recursive": true,
+                                    "enablePartitionDiscovery": false
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Copy New Flat File",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "If Flat File Parquet Exists",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "DelimitedTextSource",
+                        "storeSettings": {
+                            "type": "AzureBlobFSReadSettings",
+                            "recursive": true,
+                            "enablePartitionDiscovery": false
+                        },
+                        "formatSettings": {
+                            "type": "DelimitedTextReadSettings"
+                        }
+                    },
+                    "sink": {
+                        "type": "ParquetSink",
+                        "storeSettings": {
+                            "type": "AzureBlobFSWriteSettings"
+                        },
+                        "formatSettings": {
+                            "type": "ParquetWriteSettings"
+                        }
+                    },
+                    "enableStaging": false,
+                    "translator": {
+                        "type": "TabularTranslator",
+                        "typeConversion": true,
+                        "typeConversionSettings": {
+                            "allowDataTruncation": true,
+                            "treatBooleanAsNumber": false
+                        }
+                    }
+                },
+                "inputs": [
+                    {
+                        "referenceName": "generic_adls_flat_file_ds",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "container": "landing",
+                            "file_path": "@''",
+                            "file_name": {
+                                "value": "@concat(pipeline().parameters.source_object,'.csv')",
+                                "type": "Expression"
+                            }
+                        }
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "generic_adls_parquet_ds",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "container": {
+                                "value": "@pipeline().parameters.target_container",
+                                "type": "Expression"
+                            },
+                            "file_path": {
+                                "value": "@pipeline().parameters.target_path",
+                                "type": "Expression"
+                            },
+                            "file_name": {
+                                "value": "@concat(pipeline().parameters.target_file_name,'.parquet')",
+                                "type": "Expression"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "audit_end Flat File",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "Copy New Flat File",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/01_audit/audit_end",
+                    "baseParameters": {
+                        "run_id": {
+                            "value": "@pipeline().parameters.run_id",
+                            "type": "Expression"
+                        },
+                        "source_object": {
+                            "value": "@pipeline().parameters.source_object",
+                            "type": "Expression"
+                        },
+                        "status": {
+                            "value": "@string('SUCCESS')",
+                            "type": "Expression"
+                        },
+                        "rows_processed": {
+                            "value": "@string(activity('Copy New Flat File').output.rowsCopied)",
+                            "type": "Expression"
+                        },
+                        "watermark_value": {
+                            "value": "@''",
+                            "type": "Expression"
+                        },
+                        "error_message": {
+                            "value": "@''",
+                            "type": "Expression"
+                        },
+                        "pipeline_name": {
+                            "value": "@pipeline().parameters.pipeline_name",
+                            "type": "Expression"
+                        },
+                        "layer": {
+                            "value": "@pipeline().parameters.layer",
+                            "type": "Expression"
+                        },
+                        "source_type": {
+                            "value": "@pipeline().parameters.source_type",
+                            "type": "Expression"
+                        },
+                        "source_system": {
+                            "value": "@pipeline().parameters.source_system",
+                            "type": "Expression"
+                        },
+                        "target_object": {
+                            "value": "@pipeline().parameters.target_object",
+                            "type": "Expression"
+                        },
+                        "load_mode": {
+                            "value": "@pipeline().parameters.load_mode",
+                            "type": "Expression"
+                        },
+                        "watermark_column": {
+                            "value": "@pipeline().parameters.watermark_column",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "Fail Copy New Flat File",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "Copy New Flat File",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/01_audit/audit_end",
+                    "baseParameters": {
+                        "run_id": {
+                            "value": "@pipeline().parameters.run_id",
+                            "type": "Expression"
+                        },
+                        "source_object": {
+                            "value": "@pipeline().parameters.source_object",
+                            "type": "Expression"
+                        },
+                        "status": {
+                            "value": "@string('FAILED')",
+                            "type": "Expression"
+                        },
+                        "rows_processed": {
+                            "value": "@string('0')",
+                            "type": "Expression"
+                        },
+                        "watermark_value": {
+                            "value": "@''",
+                            "type": "Expression"
+                        },
+                        "error_message": {
+                            "value": "@activity('Copy New Flat File').error.message",
+                            "type": "Expression"
+                        },
+                        "pipeline_name": {
+                            "value": "@pipeline().parameters.pipeline_name",
+                            "type": "Expression"
+                        },
+                        "layer": {
+                            "value": "@pipeline().parameters.layer",
+                            "type": "Expression"
+                        },
+                        "source_type": {
+                            "value": "@pipeline().parameters.source_type",
+                            "type": "Expression"
+                        },
+                        "source_system": {
+                            "value": "@pipeline().parameters.source_system",
+                            "type": "Expression"
+                        },
+                        "target_object": {
+                            "value": "@pipeline().parameters.target_object",
+                            "type": "Expression"
+                        },
+                        "load_mode": {
+                            "value": "@pipeline().parameters.load_mode",
+                            "type": "Expression"
+                        },
+                        "watermark_column": {
+                            "value": "@pipeline().parameters.watermark_column",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "Fail notebook audit_end - audit_end Flat File",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "audit_end Flat File",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "audit_end notebook failed – pl_flat_files_copy_bronze stopped",
+                    "errorCode": "AUDIT_END_FAILED"
+                }
+            },
+            {
+                "name": "Fail notebook audit_end - Fail Copy New Flat File",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "Fail Copy New Flat File",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "audit_end notebook failed – pl_flat_files_copy_bronze stopped",
+                    "errorCode": "AUDIT_END_FAILED"
+                }
+            }
+        ],
+        "parameters": {
+            "run_id": {
+                "type": "string"
+            },
+            "pipeline_name": {
+                "type": "string"
+            },
+            "layer": {
+                "type": "string"
+            },
+            "source_type": {
+                "type": "string"
+            },
+            "source_system": {
+                "type": "string"
+            },
+            "source_object": {
+                "type": "string"
+            },
+            "load_mode": {
+                "type": "string"
+            },
+            "watermark_column": {
+                "type": "string"
+            },
+            "target_container": {
+                "type": "string"
+            },
+            "target_path": {
+                "type": "string"
+            },
+            "target_file_name": {
+                "type": "string"
+            },
+            "target_object": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "lastPublishTime": "2026-02-13T10:39:15Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

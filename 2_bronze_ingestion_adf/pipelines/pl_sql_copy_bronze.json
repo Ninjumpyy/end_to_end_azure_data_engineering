@@ -1,0 +1,972 @@
+{
+    "name": "pl_sql_copy_bronze",
+    "properties": {
+        "activities": [
+            {
+                "name": "audit_start SQL Notebook",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/01_audit/audit_start",
+                    "baseParameters": {
+                        "run_id": {
+                            "value": "@pipeline().parameters.run_id",
+                            "type": "Expression"
+                        },
+                        "pipeline_name": {
+                            "value": "@pipeline().parameters.pipeline_name",
+                            "type": "Expression"
+                        },
+                        "layer": {
+                            "value": "@pipeline().parameters.layer",
+                            "type": "Expression"
+                        },
+                        "source_type": {
+                            "value": "@pipeline().parameters.source_type",
+                            "type": "Expression"
+                        },
+                        "source_system": {
+                            "value": "@pipeline().parameters.source_system",
+                            "type": "Expression"
+                        },
+                        "source_object": {
+                            "value": "@pipeline().parameters.source_object",
+                            "type": "Expression"
+                        },
+                        "target_object": {
+                            "value": "@pipeline().parameters.target_object",
+                            "type": "Expression"
+                        },
+                        "load_mode": {
+                            "value": "@pipeline().parameters.load_mode",
+                            "type": "Expression"
+                        },
+                        "watermark_column": {
+                            "value": "@pipeline().parameters.watermark_column",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "audit_start SQL failed",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "audit_start SQL Notebook",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "audit_start SQL failed – pl_sql-copy_bronze stopped",
+                    "errorCode": "AUDIT_START_FAILED"
+                }
+            },
+            {
+                "name": "Get Metadata Bronze File",
+                "type": "GetMetadata",
+                "dependsOn": [
+                    {
+                        "activity": "audit_start SQL Notebook",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataset": {
+                        "referenceName": "generic_adls_parquet_ds",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "container": {
+                                "value": "@pipeline().parameters.target_container",
+                                "type": "Expression"
+                            },
+                            "file_path": {
+                                "value": "@pipeline().parameters.target_path",
+                                "type": "Expression"
+                            },
+                            "file_name": {
+                                "value": "@concat(pipeline().parameters.target_file_name,'.parquet')",
+                                "type": "Expression"
+                            }
+                        }
+                    },
+                    "fieldList": [
+                        "exists"
+                    ],
+                    "storeSettings": {
+                        "type": "AzureBlobStorageReadSettings",
+                        "recursive": true,
+                        "enablePartitionDiscovery": false
+                    },
+                    "formatSettings": {
+                        "type": "ParquetReadSettings"
+                    }
+                }
+            },
+            {
+                "name": "If Bronze File Exists AND full load",
+                "type": "IfCondition",
+                "dependsOn": [
+                    {
+                        "activity": "Get Metadata Bronze File",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "expression": {
+                        "value": "@and(activity('Get Metadata Bronze File').output.exists,equals(pipeline().parameters.load_mode, 'full'))",
+                        "type": "Expression"
+                    },
+                    "ifTrueActivities": [
+                        {
+                            "name": "Archive Bronze File",
+                            "type": "Copy",
+                            "dependsOn": [],
+                            "policy": {
+                                "timeout": "0.12:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "source": {
+                                    "type": "ParquetSource",
+                                    "storeSettings": {
+                                        "type": "AzureBlobFSReadSettings",
+                                        "recursive": true,
+                                        "enablePartitionDiscovery": false
+                                    },
+                                    "formatSettings": {
+                                        "type": "ParquetReadSettings"
+                                    }
+                                },
+                                "sink": {
+                                    "type": "ParquetSink",
+                                    "storeSettings": {
+                                        "type": "AzureBlobFSWriteSettings"
+                                    },
+                                    "formatSettings": {
+                                        "type": "ParquetWriteSettings"
+                                    }
+                                },
+                                "enableStaging": false,
+                                "translator": {
+                                    "type": "TabularTranslator",
+                                    "typeConversion": true,
+                                    "typeConversionSettings": {
+                                        "allowDataTruncation": true,
+                                        "treatBooleanAsNumber": false
+                                    }
+                                }
+                            },
+                            "inputs": [
+                                {
+                                    "referenceName": "generic_adls_parquet_ds",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "container": {
+                                            "value": "@pipeline().parameters.target_container",
+                                            "type": "Expression"
+                                        },
+                                        "file_path": {
+                                            "value": "@pipeline().parameters.target_path",
+                                            "type": "Expression"
+                                        },
+                                        "file_name": {
+                                            "value": "@concat(pipeline().parameters.target_file_name,'.parquet')",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                }
+                            ],
+                            "outputs": [
+                                {
+                                    "referenceName": "generic_adls_parquet_ds",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "container": {
+                                            "value": "@pipeline().parameters.target_container",
+                                            "type": "Expression"
+                                        },
+                                        "file_path": "archive",
+                                        "file_name": {
+                                            "value": "@concat(pipeline().parameters.target_file_name,'_',formatDateTime(utcNow(),'yyyyMMddmm'),'.parquet')",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Delete Bronze File",
+                            "type": "Delete",
+                            "dependsOn": [
+                                {
+                                    "activity": "Archive Bronze File",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "policy": {
+                                "timeout": "0.12:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "dataset": {
+                                    "referenceName": "generic_adls_parquet_ds",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "container": {
+                                            "value": "@pipeline().parameters.target_container",
+                                            "type": "Expression"
+                                        },
+                                        "file_path": {
+                                            "value": "@pipeline().parameters.target_path",
+                                            "type": "Expression"
+                                        },
+                                        "file_name": {
+                                            "value": "@concat(pipeline().parameters.target_file_name,'.parquet')",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                },
+                                "enableLogging": false,
+                                "storeSettings": {
+                                    "type": "AzureBlobStorageReadSettings",
+                                    "recursive": true,
+                                    "enablePartitionDiscovery": false
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Load Type",
+                "type": "Switch",
+                "dependsOn": [
+                    {
+                        "activity": "If Bronze File Exists AND full load",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "on": {
+                        "value": "@pipeline().parameters.load_mode",
+                        "type": "Expression"
+                    },
+                    "cases": [
+                        {
+                            "value": "full",
+                            "activities": [
+                                {
+                                    "name": "Full Copy SQL to Bronze",
+                                    "type": "Copy",
+                                    "dependsOn": [],
+                                    "policy": {
+                                        "timeout": "0.12:00:00",
+                                        "retry": 0,
+                                        "retryIntervalInSeconds": 30,
+                                        "secureOutput": false,
+                                        "secureInput": false
+                                    },
+                                    "userProperties": [],
+                                    "typeProperties": {
+                                        "source": {
+                                            "type": "AzureSqlSource",
+                                            "queryTimeout": "02:00:00",
+                                            "partitionOption": "None"
+                                        },
+                                        "sink": {
+                                            "type": "ParquetSink",
+                                            "storeSettings": {
+                                                "type": "AzureBlobFSWriteSettings"
+                                            },
+                                            "formatSettings": {
+                                                "type": "ParquetWriteSettings"
+                                            }
+                                        },
+                                        "enableStaging": false,
+                                        "translator": {
+                                            "type": "TabularTranslator",
+                                            "typeConversion": true,
+                                            "typeConversionSettings": {
+                                                "allowDataTruncation": true,
+                                                "treatBooleanAsNumber": false
+                                            }
+                                        }
+                                    },
+                                    "inputs": [
+                                        {
+                                            "referenceName": "generic_sql_ds",
+                                            "type": "DatasetReference",
+                                            "parameters": {
+                                                "db_name": {
+                                                    "value": "@pipeline().parameters.source_system",
+                                                    "type": "Expression"
+                                                },
+                                                "schema_name": {
+                                                    "value": "@pipeline().parameters.source_schema",
+                                                    "type": "Expression"
+                                                },
+                                                "table_name": {
+                                                    "value": "@pipeline().parameters.source_object",
+                                                    "type": "Expression"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "outputs": [
+                                        {
+                                            "referenceName": "generic_adls_parquet_ds",
+                                            "type": "DatasetReference",
+                                            "parameters": {
+                                                "container": {
+                                                    "value": "@pipeline().parameters.target_container",
+                                                    "type": "Expression"
+                                                },
+                                                "file_path": {
+                                                    "value": "@pipeline().parameters.target_path",
+                                                    "type": "Expression"
+                                                },
+                                                "file_name": {
+                                                    "value": "@concat(pipeline().parameters.target_file_name,'.parquet')",
+                                                    "type": "Expression"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "audit_end SQL full",
+                                    "type": "DatabricksNotebook",
+                                    "dependsOn": [
+                                        {
+                                            "activity": "Full Copy SQL to Bronze",
+                                            "dependencyConditions": [
+                                                "Succeeded"
+                                            ]
+                                        }
+                                    ],
+                                    "policy": {
+                                        "timeout": "0.12:00:00",
+                                        "retry": 3,
+                                        "retryIntervalInSeconds": 30,
+                                        "secureOutput": false,
+                                        "secureInput": false
+                                    },
+                                    "userProperties": [],
+                                    "typeProperties": {
+                                        "notebookPath": "/Shared/01_audit/audit_end",
+                                        "baseParameters": {
+                                            "run_id": {
+                                                "value": "@pipeline().parameters.run_id",
+                                                "type": "Expression"
+                                            },
+                                            "source_object": {
+                                                "value": "@pipeline().parameters.source_object",
+                                                "type": "Expression"
+                                            },
+                                            "status": {
+                                                "value": "@string('SUCCESS')",
+                                                "type": "Expression"
+                                            },
+                                            "rows_processed": {
+                                                "value": "@string(activity('Full Copy SQL to Bronze').output.rowsCopied)",
+                                                "type": "Expression"
+                                            },
+                                            "watermark_value": {
+                                                "value": "@string('')",
+                                                "type": "Expression"
+                                            },
+                                            "error_message": {
+                                                "value": "@string('')",
+                                                "type": "Expression"
+                                            },
+                                            "pipeline_name": {
+                                                "value": "@pipeline().parameters.pipeline_name",
+                                                "type": "Expression"
+                                            },
+                                            "layer": {
+                                                "value": "@pipeline().parameters.layer",
+                                                "type": "Expression"
+                                            },
+                                            "source_type": {
+                                                "value": "@pipeline().parameters.source_type",
+                                                "type": "Expression"
+                                            },
+                                            "source_system": {
+                                                "value": "@pipeline().parameters.source_system",
+                                                "type": "Expression"
+                                            },
+                                            "target_object": {
+                                                "value": "@pipeline().parameters.target_object",
+                                                "type": "Expression"
+                                            },
+                                            "load_mode": {
+                                                "value": "@pipeline().parameters.load_mode",
+                                                "type": "Expression"
+                                            },
+                                            "watermark_column": {
+                                                "value": "@pipeline().parameters.watermark_column",
+                                                "type": "Expression"
+                                            }
+                                        }
+                                    },
+                                    "linkedServiceName": {
+                                        "referenceName": "tlm_bank_dbx_ls",
+                                        "type": "LinkedServiceReference"
+                                    }
+                                },
+                                {
+                                    "name": "Fail full copy SQL",
+                                    "type": "DatabricksNotebook",
+                                    "dependsOn": [
+                                        {
+                                            "activity": "Full Copy SQL to Bronze",
+                                            "dependencyConditions": [
+                                                "Failed"
+                                            ]
+                                        }
+                                    ],
+                                    "policy": {
+                                        "timeout": "0.12:00:00",
+                                        "retry": 3,
+                                        "retryIntervalInSeconds": 30,
+                                        "secureOutput": false,
+                                        "secureInput": false
+                                    },
+                                    "userProperties": [],
+                                    "typeProperties": {
+                                        "notebookPath": "/Shared/01_audit/audit_end",
+                                        "baseParameters": {
+                                            "run_id": {
+                                                "value": "@pipeline().parameters.run_id",
+                                                "type": "Expression"
+                                            },
+                                            "source_object": {
+                                                "value": "@pipeline().parameters.source_object",
+                                                "type": "Expression"
+                                            },
+                                            "status": {
+                                                "value": "@'FAILED'",
+                                                "type": "Expression"
+                                            },
+                                            "rows_processed": {
+                                                "value": "@string(0)",
+                                                "type": "Expression"
+                                            },
+                                            "watermark_value": {
+                                                "value": "@string('')",
+                                                "type": "Expression"
+                                            },
+                                            "error_message": {
+                                                "value": "@coalesce(activity('Full Copy SQL to Bronze').error.message, '')",
+                                                "type": "Expression"
+                                            },
+                                            "pipeline_name": {
+                                                "value": "@pipeline().parameters.pipeline_name",
+                                                "type": "Expression"
+                                            },
+                                            "layer": {
+                                                "value": "@pipeline().parameters.layer",
+                                                "type": "Expression"
+                                            },
+                                            "source_type": {
+                                                "value": "@pipeline().parameters.source_type",
+                                                "type": "Expression"
+                                            },
+                                            "source_system": {
+                                                "value": "@pipeline().parameters.source_system",
+                                                "type": "Expression"
+                                            },
+                                            "target_object": {
+                                                "value": "@pipeline().parameters.target_object",
+                                                "type": "Expression"
+                                            },
+                                            "load_mode": {
+                                                "value": "@pipeline().parameters.load_mode",
+                                                "type": "Expression"
+                                            },
+                                            "watermark_column": {
+                                                "value": "@pipeline().parameters.watermark_column",
+                                                "type": "Expression"
+                                            }
+                                        }
+                                    },
+                                    "linkedServiceName": {
+                                        "referenceName": "tlm_bank_dbx_ls",
+                                        "type": "LinkedServiceReference"
+                                    }
+                                },
+                                {
+                                    "name": "Fail audit_end - audit_end SQL full",
+                                    "type": "Fail",
+                                    "dependsOn": [
+                                        {
+                                            "activity": "audit_end SQL full",
+                                            "dependencyConditions": [
+                                                "Failed"
+                                            ]
+                                        }
+                                    ],
+                                    "userProperties": [],
+                                    "typeProperties": {
+                                        "message": "audit_end notebook failed – pl_sql_copy_bronze stopped",
+                                        "errorCode": "AUDIT_END_FAILED"
+                                    }
+                                },
+                                {
+                                    "name": "Fail audit_end - Failt full copy SQL",
+                                    "type": "Fail",
+                                    "dependsOn": [
+                                        {
+                                            "activity": "Fail full copy SQL",
+                                            "dependencyConditions": [
+                                                "Failed"
+                                            ]
+                                        }
+                                    ],
+                                    "userProperties": [],
+                                    "typeProperties": {
+                                        "message": "audit_end notebook failed – pl_sql_copy_bronze stopped",
+                                        "errorCode": "AUDIT_END_FAILED"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "value": "incremental",
+                            "activities": [
+                                {
+                                    "name": "Fetch Logs",
+                                    "type": "DatabricksNotebook",
+                                    "dependsOn": [],
+                                    "policy": {
+                                        "timeout": "0.12:00:00",
+                                        "retry": 3,
+                                        "retryIntervalInSeconds": 30,
+                                        "secureOutput": false,
+                                        "secureInput": false
+                                    },
+                                    "userProperties": [],
+                                    "typeProperties": {
+                                        "notebookPath": "/Shared/01_audit/fetch_logs",
+                                        "baseParameters": {
+                                            "source_system": {
+                                                "value": "@pipeline().parameters.source_system",
+                                                "type": "Expression"
+                                            },
+                                            "source_object": {
+                                                "value": "@pipeline().parameters.source_object",
+                                                "type": "Expression"
+                                            }
+                                        }
+                                    },
+                                    "linkedServiceName": {
+                                        "referenceName": "tlm_bank_dbx_ls",
+                                        "type": "LinkedServiceReference"
+                                    }
+                                },
+                                {
+                                    "name": "Incr Copy SQL to Bronze",
+                                    "type": "Copy",
+                                    "dependsOn": [
+                                        {
+                                            "activity": "incr_file_name",
+                                            "dependencyConditions": [
+                                                "Succeeded"
+                                            ]
+                                        }
+                                    ],
+                                    "policy": {
+                                        "timeout": "0.12:00:00",
+                                        "retry": 0,
+                                        "retryIntervalInSeconds": 30,
+                                        "secureOutput": false,
+                                        "secureInput": false
+                                    },
+                                    "userProperties": [],
+                                    "typeProperties": {
+                                        "source": {
+                                            "type": "AzureSqlSource",
+                                            "sqlReaderQuery": {
+                                                "value": "@concat(\n  'SELECT * FROM ',\n  pipeline().parameters.source_schema, '.',\n  pipeline().parameters.source_object,\n  if(empty(activity('Fetch Logs').output.runOutput),\n    '',\n    concat(\n      ' WHERE ',\n      pipeline().parameters.watermark_column,\n      ' > ''',\n      activity('Fetch Logs').output.runOutput,\n      ''''\n    )\n  )\n)",
+                                                "type": "Expression"
+                                            },
+                                            "queryTimeout": "02:00:00",
+                                            "partitionOption": "None"
+                                        },
+                                        "sink": {
+                                            "type": "ParquetSink",
+                                            "storeSettings": {
+                                                "type": "AzureBlobFSWriteSettings"
+                                            },
+                                            "formatSettings": {
+                                                "type": "ParquetWriteSettings"
+                                            }
+                                        },
+                                        "enableStaging": false,
+                                        "translator": {
+                                            "type": "TabularTranslator",
+                                            "typeConversion": true,
+                                            "typeConversionSettings": {
+                                                "allowDataTruncation": true,
+                                                "treatBooleanAsNumber": false
+                                            }
+                                        }
+                                    },
+                                    "inputs": [
+                                        {
+                                            "referenceName": "generic_sql_ds",
+                                            "type": "DatasetReference",
+                                            "parameters": {
+                                                "db_name": {
+                                                    "value": "@pipeline().parameters.source_system",
+                                                    "type": "Expression"
+                                                },
+                                                "schema_name": {
+                                                    "value": "@pipeline().parameters.source_schema",
+                                                    "type": "Expression"
+                                                },
+                                                "table_name": {
+                                                    "value": "@pipeline().parameters.source_object",
+                                                    "type": "Expression"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "outputs": [
+                                        {
+                                            "referenceName": "generic_adls_parquet_ds",
+                                            "type": "DatasetReference",
+                                            "parameters": {
+                                                "container": {
+                                                    "value": "@pipeline().parameters.target_container",
+                                                    "type": "Expression"
+                                                },
+                                                "file_path": {
+                                                    "value": "@concat(pipeline().parameters.target_path,'/incr')\n",
+                                                    "type": "Expression"
+                                                },
+                                                "file_name": {
+                                                    "value": "@variables('incr_file_name')\n\n",
+                                                    "type": "Expression"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Fail Fetch Logs",
+                                    "type": "Fail",
+                                    "dependsOn": [
+                                        {
+                                            "activity": "Fetch Logs",
+                                            "dependencyConditions": [
+                                                "Failed"
+                                            ]
+                                        }
+                                    ],
+                                    "userProperties": [],
+                                    "typeProperties": {
+                                        "message": "fetch logs notebook failed – pl_sql_copy_bronze stopped",
+                                        "errorCode": "FETCH_LOGS_FAILED"
+                                    }
+                                },
+                                {
+                                    "name": "audit_end Incr Load",
+                                    "type": "DatabricksNotebook",
+                                    "dependsOn": [
+                                        {
+                                            "activity": "Catch New Watermark Value",
+                                            "dependencyConditions": [
+                                                "Succeeded"
+                                            ]
+                                        }
+                                    ],
+                                    "policy": {
+                                        "timeout": "0.12:00:00",
+                                        "retry": 3,
+                                        "retryIntervalInSeconds": 30,
+                                        "secureOutput": false,
+                                        "secureInput": false
+                                    },
+                                    "userProperties": [],
+                                    "typeProperties": {
+                                        "notebookPath": "/Shared/01_audit/audit_end",
+                                        "baseParameters": {
+                                            "run_id": {
+                                                "value": "@pipeline().parameters.run_id",
+                                                "type": "Expression"
+                                            },
+                                            "source_object": {
+                                                "value": "@pipeline().parameters.source_object",
+                                                "type": "Expression"
+                                            },
+                                            "status": {
+                                                "value": "@string('SUCCESS')",
+                                                "type": "Expression"
+                                            },
+                                            "rows_processed": {
+                                                "value": "@string(activity('Incr Copy SQL to Bronze').output.rowsCopied)",
+                                                "type": "Expression"
+                                            },
+                                            "error_message": {
+                                                "value": "@string('')",
+                                                "type": "Expression"
+                                            },
+                                            "watermark_value": {
+                                                "value": "@coalesce(\n  activity('Catch New Watermark Value').output.runOutput,\n  activity('Fetch Logs').output.runOutput\n)\n",
+                                                "type": "Expression"
+                                            },
+                                            "pipeline_name": {
+                                                "value": "@pipeline().parameters.pipeline_name",
+                                                "type": "Expression"
+                                            },
+                                            "layer": {
+                                                "value": "@pipeline().parameters.layer",
+                                                "type": "Expression"
+                                            },
+                                            "source_type": {
+                                                "value": "@pipeline().parameters.source_type",
+                                                "type": "Expression"
+                                            },
+                                            "source_system": {
+                                                "value": "@pipeline().parameters.source_system",
+                                                "type": "Expression"
+                                            },
+                                            "target_object": {
+                                                "value": "@pipeline().parameters.target_object",
+                                                "type": "Expression"
+                                            },
+                                            "load_mode": {
+                                                "value": "@pipeline().parameters.load_mode",
+                                                "type": "Expression"
+                                            },
+                                            "watermark_column": {
+                                                "value": "@pipeline().parameters.watermark_column",
+                                                "type": "Expression"
+                                            }
+                                        }
+                                    },
+                                    "linkedServiceName": {
+                                        "referenceName": "tlm_bank_dbx_ls",
+                                        "type": "LinkedServiceReference"
+                                    }
+                                },
+                                {
+                                    "name": "Fail audit_end incr sql copy",
+                                    "type": "Fail",
+                                    "dependsOn": [
+                                        {
+                                            "activity": "audit_end Incr Load",
+                                            "dependencyConditions": [
+                                                "Failed"
+                                            ]
+                                        }
+                                    ],
+                                    "userProperties": [],
+                                    "typeProperties": {
+                                        "message": "audit_end notebook failed – pl_sql_copy_bronze stopped",
+                                        "errorCode": "AUDIT_END_FAILED"
+                                    }
+                                },
+                                {
+                                    "name": "Fail Incr Copy",
+                                    "type": "Fail",
+                                    "dependsOn": [
+                                        {
+                                            "activity": "Incr Copy SQL to Bronze",
+                                            "dependencyConditions": [
+                                                "Failed"
+                                            ]
+                                        }
+                                    ],
+                                    "userProperties": [],
+                                    "typeProperties": {
+                                        "message": "sql incremental copy failed – pl_sql_copy_bronze stopped",
+                                        "errorCode": "INCR_COPY_FAILED"
+                                    }
+                                },
+                                {
+                                    "name": "Catch New Watermark Value",
+                                    "type": "DatabricksNotebook",
+                                    "dependsOn": [
+                                        {
+                                            "activity": "Incr Copy SQL to Bronze",
+                                            "dependencyConditions": [
+                                                "Succeeded"
+                                            ]
+                                        }
+                                    ],
+                                    "policy": {
+                                        "timeout": "0.12:00:00",
+                                        "retry": 3,
+                                        "retryIntervalInSeconds": 30,
+                                        "secureOutput": false,
+                                        "secureInput": false
+                                    },
+                                    "userProperties": [],
+                                    "typeProperties": {
+                                        "notebookPath": "/Shared/01_audit/catch_new_watermark_value",
+                                        "baseParameters": {
+                                            "container": {
+                                                "value": "@pipeline().parameters.target_container",
+                                                "type": "Expression"
+                                            },
+                                            "file_path": {
+                                                "value": "@concat(pipeline().parameters.target_path,'/incr')",
+                                                "type": "Expression"
+                                            },
+                                            "file_name": {
+                                                "value": "@variables('incr_file_name')\n",
+                                                "type": "Expression"
+                                            },
+                                            "watermark_column": {
+                                                "value": "@string(coalesce(pipeline().parameters.watermark_column, ''))",
+                                                "type": "Expression"
+                                            }
+                                        }
+                                    },
+                                    "linkedServiceName": {
+                                        "referenceName": "tlm_bank_dbx_ls",
+                                        "type": "LinkedServiceReference"
+                                    }
+                                },
+                                {
+                                    "name": "Fail Incr Copy_copy1",
+                                    "type": "Fail",
+                                    "dependsOn": [
+                                        {
+                                            "activity": "Catch New Watermark Value",
+                                            "dependencyConditions": [
+                                                "Failed"
+                                            ]
+                                        }
+                                    ],
+                                    "userProperties": [],
+                                    "typeProperties": {
+                                        "message": "catch new watermark notebook failed – pl_sql_copy_bronze stopped",
+                                        "errorCode": "CATCH_NEW_WATERMARK_FAILED"
+                                    }
+                                },
+                                {
+                                    "name": "incr_file_name",
+                                    "type": "SetVariable",
+                                    "dependsOn": [
+                                        {
+                                            "activity": "Fetch Logs",
+                                            "dependencyConditions": [
+                                                "Succeeded"
+                                            ]
+                                        }
+                                    ],
+                                    "policy": {
+                                        "secureOutput": false,
+                                        "secureInput": false
+                                    },
+                                    "userProperties": [],
+                                    "typeProperties": {
+                                        "variableName": "incr_file_name",
+                                        "value": {
+                                            "value": "@concat(pipeline().parameters.target_file_name,\n  '_', formatDateTime(utcNow(),'yyyyMMddmm'),\n  '.parquet')",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ],
+        "parameters": {
+            "run_id": {
+                "type": "string"
+            },
+            "pipeline_name": {
+                "type": "string"
+            },
+            "layer": {
+                "type": "string"
+            },
+            "source_type": {
+                "type": "string"
+            },
+            "source_system": {
+                "type": "string"
+            },
+            "source_object": {
+                "type": "string"
+            },
+            "target_object": {
+                "type": "string"
+            },
+            "load_mode": {
+                "type": "string"
+            },
+            "watermark_column": {
+                "type": "string"
+            },
+            "target_container": {
+                "type": "string"
+            },
+            "target_path": {
+                "type": "string"
+            },
+            "target_file_name": {
+                "type": "string"
+            },
+            "source_schema": {
+                "type": "string"
+            }
+        },
+        "variables": {
+            "incr_file_name": {
+                "type": "String"
+            }
+        },
+        "annotations": [],
+        "lastPublishTime": "2026-02-13T10:39:15Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

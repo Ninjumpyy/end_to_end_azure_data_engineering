@@ -1,0 +1,742 @@
+{
+    "name": "pl_ingestion",
+    "properties": {
+        "activities": [
+            {
+                "name": "Get Metadata Load Config",
+                "type": "GetMetadata",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataset": {
+                        "referenceName": "generic_adls_flat_file_ds",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "container": "configs",
+                            "file_path": "ingestion",
+                            "file_name": "load_config.csv"
+                        }
+                    },
+                    "fieldList": [
+                        "exists"
+                    ],
+                    "storeSettings": {
+                        "type": "AzureBlobStorageReadSettings",
+                        "recursive": true,
+                        "enablePartitionDiscovery": false
+                    },
+                    "formatSettings": {
+                        "type": "DelimitedTextReadSettings"
+                    }
+                }
+            },
+            {
+                "name": "If Load Config Exist",
+                "type": "IfCondition",
+                "dependsOn": [
+                    {
+                        "activity": "Get Metadata Load Config",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "expression": {
+                        "value": "@activity('Get Metadata Load Config').output.exists",
+                        "type": "Expression"
+                    },
+                    "ifFalseActivities": [
+                        {
+                            "name": "Load Config Not Found",
+                            "type": "Fail",
+                            "dependsOn": [],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "message": "load_config not found",
+                                "errorCode": "CONFIG_NOT_FOUND"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Get Metadata Fail",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "Get Metadata Load Config",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "Get Metadata Load Config activity crashed",
+                    "errorCode": "CONFIG_METADATA_FAILED"
+                }
+            },
+            {
+                "name": "For Each Row In Load Config",
+                "type": "ForEach",
+                "dependsOn": [
+                    {
+                        "activity": "Lookup Load Config",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "items": {
+                        "value": "@activity('Lookup Load Config').output.value\n",
+                        "type": "Expression"
+                    },
+                    "isSequential": false,
+                    "batchCount": 10,
+                    "activities": [
+                        {
+                            "name": "Switch Source Type",
+                            "type": "Switch",
+                            "dependsOn": [],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "on": {
+                                    "value": "@item().source_type\n",
+                                    "type": "Expression"
+                                },
+                                "cases": [
+                                    {
+                                        "value": "sql",
+                                        "activities": [
+                                            {
+                                                "name": "Execute Pipeline SQL",
+                                                "type": "ExecutePipeline",
+                                                "dependsOn": [],
+                                                "policy": {
+                                                    "secureInput": false
+                                                },
+                                                "userProperties": [],
+                                                "typeProperties": {
+                                                    "pipeline": {
+                                                        "referenceName": "pl_sql_copy_bronze",
+                                                        "type": "PipelineReference"
+                                                    },
+                                                    "waitOnCompletion": true,
+                                                    "parameters": {
+                                                        "run_id": {
+                                                            "value": "@pipeline().RunId",
+                                                            "type": "Expression"
+                                                        },
+                                                        "pipeline_name": {
+                                                            "value": "@pipeline().Pipeline",
+                                                            "type": "Expression"
+                                                        },
+                                                        "layer": {
+                                                            "value": "@string('bronze')",
+                                                            "type": "Expression"
+                                                        },
+                                                        "source_type": {
+                                                            "value": "@item().source_type",
+                                                            "type": "Expression"
+                                                        },
+                                                        "source_system": {
+                                                            "value": "@item().db_name",
+                                                            "type": "Expression"
+                                                        },
+                                                        "source_object": {
+                                                            "value": "@item().table_name",
+                                                            "type": "Expression"
+                                                        },
+                                                        "target_object": {
+                                                            "value": "@concat(item().target_path,'/',item().target_file_name)",
+                                                            "type": "Expression"
+                                                        },
+                                                        "load_mode": {
+                                                            "value": "@item().load_mode",
+                                                            "type": "Expression"
+                                                        },
+                                                        "watermark_column": {
+                                                            "value": "@coalesce(item().watermark_column, '')",
+                                                            "type": "Expression"
+                                                        },
+                                                        "target_container": {
+                                                            "value": "@item().target_container",
+                                                            "type": "Expression"
+                                                        },
+                                                        "target_path": {
+                                                            "value": "@item().target_path",
+                                                            "type": "Expression"
+                                                        },
+                                                        "target_file_name": {
+                                                            "value": "@item().target_file_name",
+                                                            "type": "Expression"
+                                                        },
+                                                        "source_schema": {
+                                                            "value": "@item().schema_name",
+                                                            "type": "Expression"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "value": "landing",
+                                        "activities": [
+                                            {
+                                                "name": "Execute pl_flat_files_copy_bronze",
+                                                "type": "ExecutePipeline",
+                                                "dependsOn": [],
+                                                "policy": {
+                                                    "secureInput": false
+                                                },
+                                                "userProperties": [],
+                                                "typeProperties": {
+                                                    "pipeline": {
+                                                        "referenceName": "pl_flat_files_copy_bronze",
+                                                        "type": "PipelineReference"
+                                                    },
+                                                    "waitOnCompletion": true,
+                                                    "parameters": {
+                                                        "run_id": {
+                                                            "value": "@pipeline().RunId",
+                                                            "type": "Expression"
+                                                        },
+                                                        "pipeline_name": {
+                                                            "value": "@pipeline().Pipeline",
+                                                            "type": "Expression"
+                                                        },
+                                                        "layer": "bronze",
+                                                        "source_type": {
+                                                            "value": "@item().source_type",
+                                                            "type": "Expression"
+                                                        },
+                                                        "source_system": "external",
+                                                        "source_object": {
+                                                            "value": "@item().source_path",
+                                                            "type": "Expression"
+                                                        },
+                                                        "load_mode": {
+                                                            "value": "@item().load_mode",
+                                                            "type": "Expression"
+                                                        },
+                                                        "watermark_column": {
+                                                            "value": "@coalesce(item().watermark_column, '')",
+                                                            "type": "Expression"
+                                                        },
+                                                        "target_container": {
+                                                            "value": "@item().target_container",
+                                                            "type": "Expression"
+                                                        },
+                                                        "target_path": {
+                                                            "value": "@item().target_path",
+                                                            "type": "Expression"
+                                                        },
+                                                        "target_file_name": {
+                                                            "value": "@item().target_file_name",
+                                                            "type": "Expression"
+                                                        },
+                                                        "target_object": {
+                                                            "value": "@concat(item().target_path,'/',item().target_file_name)",
+                                                            "type": "Expression"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "value": "api",
+                                        "activities": [
+                                            {
+                                                "name": "audit_start API Notebook",
+                                                "type": "DatabricksNotebook",
+                                                "dependsOn": [],
+                                                "policy": {
+                                                    "timeout": "0.12:00:00",
+                                                    "retry": 0,
+                                                    "retryIntervalInSeconds": 30,
+                                                    "secureOutput": false,
+                                                    "secureInput": false
+                                                },
+                                                "userProperties": [],
+                                                "typeProperties": {
+                                                    "notebookPath": "/Shared/01_audit/audit_start",
+                                                    "baseParameters": {
+                                                        "run_id": {
+                                                            "value": "@pipeline().RunId",
+                                                            "type": "Expression"
+                                                        },
+                                                        "pipeline_name": {
+                                                            "value": "@pipeline().Pipeline",
+                                                            "type": "Expression"
+                                                        },
+                                                        "layer": {
+                                                            "value": "@string('bronze')",
+                                                            "type": "Expression"
+                                                        },
+                                                        "source_type": {
+                                                            "value": "@item().source_type",
+                                                            "type": "Expression"
+                                                        },
+                                                        "source_system": {
+                                                            "value": "@item().source_path",
+                                                            "type": "Expression"
+                                                        },
+                                                        "source_object": {
+                                                            "value": "@item().target_file_name",
+                                                            "type": "Expression"
+                                                        },
+                                                        "target_object": {
+                                                            "value": "@concat(item().target_path,'/',item().target_file_name)",
+                                                            "type": "Expression"
+                                                        },
+                                                        "load_mode": {
+                                                            "value": "@item().load_mode",
+                                                            "type": "Expression"
+                                                        },
+                                                        "watermark_column": {
+                                                            "value": "@string('')",
+                                                            "type": "Expression"
+                                                        }
+                                                    }
+                                                },
+                                                "linkedServiceName": {
+                                                    "referenceName": "tlm_bank_dbx_ls",
+                                                    "type": "LinkedServiceReference"
+                                                }
+                                            },
+                                            {
+                                                "name": "audit_start API failed",
+                                                "type": "Fail",
+                                                "dependsOn": [
+                                                    {
+                                                        "activity": "audit_start API Notebook",
+                                                        "dependencyConditions": [
+                                                            "Failed"
+                                                        ]
+                                                    }
+                                                ],
+                                                "userProperties": [],
+                                                "typeProperties": {
+                                                    "message": "audit_start API failed – ingestion stopped",
+                                                    "errorCode": "AUDIT_START_FAILED"
+                                                }
+                                            },
+                                            {
+                                                "name": "API Extract Fx Rates",
+                                                "type": "DatabricksNotebook",
+                                                "dependsOn": [
+                                                    {
+                                                        "activity": "audit_start API Notebook",
+                                                        "dependencyConditions": [
+                                                            "Succeeded"
+                                                        ]
+                                                    }
+                                                ],
+                                                "policy": {
+                                                    "timeout": "0.12:00:00",
+                                                    "retry": 0,
+                                                    "retryIntervalInSeconds": 30,
+                                                    "secureOutput": false,
+                                                    "secureInput": false
+                                                },
+                                                "userProperties": [],
+                                                "typeProperties": {
+                                                    "notebookPath": "/Shared/02_api/api_extract_fx_rates",
+                                                    "baseParameters": {
+                                                        "target_container": {
+                                                            "value": "@item().target_container",
+                                                            "type": "Expression"
+                                                        },
+                                                        "target_path": {
+                                                            "value": "@item().target_path",
+                                                            "type": "Expression"
+                                                        }
+                                                    }
+                                                },
+                                                "linkedServiceName": {
+                                                    "referenceName": "tlm_bank_dbx_ls",
+                                                    "type": "LinkedServiceReference"
+                                                }
+                                            },
+                                            {
+                                                "name": "audit_end API Notebook",
+                                                "type": "DatabricksNotebook",
+                                                "dependsOn": [
+                                                    {
+                                                        "activity": "API Extract Fx Rates",
+                                                        "dependencyConditions": [
+                                                            "Succeeded"
+                                                        ]
+                                                    }
+                                                ],
+                                                "policy": {
+                                                    "timeout": "0.12:00:00",
+                                                    "retry": 0,
+                                                    "retryIntervalInSeconds": 30,
+                                                    "secureOutput": false,
+                                                    "secureInput": false
+                                                },
+                                                "userProperties": [],
+                                                "typeProperties": {
+                                                    "notebookPath": "/Shared/01_audit/audit_end",
+                                                    "baseParameters": {
+                                                        "run_id": {
+                                                            "value": "@pipeline().RunId",
+                                                            "type": "Expression"
+                                                        },
+                                                        "source_object": {
+                                                            "value": "@item().target_file_name",
+                                                            "type": "Expression"
+                                                        },
+                                                        "status": {
+                                                            "value": "@string('SUCCESS')",
+                                                            "type": "Expression"
+                                                        },
+                                                        "rows_processed": {
+                                                            "value": "@string(activity('API Extract Fx Rates').output.runOutput)",
+                                                            "type": "Expression"
+                                                        },
+                                                        "error_message": {
+                                                            "value": "@string('')",
+                                                            "type": "Expression"
+                                                        },
+                                                        "watermark_value": {
+                                                            "value": "@string('')",
+                                                            "type": "Expression"
+                                                        },
+                                                        "pipeline_name": {
+                                                            "value": "@pipeline().Pipeline",
+                                                            "type": "Expression"
+                                                        },
+                                                        "layer": "@string('bronze')",
+                                                        "source_type": "@item().source_type",
+                                                        "source_system": "@item().source_path",
+                                                        "target_object": "@concat(item().target_path,'/',item().target_file_name)",
+                                                        "load_mode": "@item().load_mode",
+                                                        "watermark_column": "@string('')"
+                                                    }
+                                                },
+                                                "linkedServiceName": {
+                                                    "referenceName": "tlm_bank_dbx_ls",
+                                                    "type": "LinkedServiceReference"
+                                                }
+                                            },
+                                            {
+                                                "name": "audit_end API Failed",
+                                                "type": "DatabricksNotebook",
+                                                "dependsOn": [
+                                                    {
+                                                        "activity": "API Extract Fx Rates",
+                                                        "dependencyConditions": [
+                                                            "Failed"
+                                                        ]
+                                                    }
+                                                ],
+                                                "policy": {
+                                                    "timeout": "0.12:00:00",
+                                                    "retry": 0,
+                                                    "retryIntervalInSeconds": 30,
+                                                    "secureOutput": false,
+                                                    "secureInput": false
+                                                },
+                                                "userProperties": [],
+                                                "typeProperties": {
+                                                    "notebookPath": "/Shared/01_audit/audit_end",
+                                                    "baseParameters": {
+                                                        "run_id": {
+                                                            "value": "@pipeline().RunId",
+                                                            "type": "Expression"
+                                                        },
+                                                        "source_object": {
+                                                            "value": "@item().target_file_name",
+                                                            "type": "Expression"
+                                                        },
+                                                        "status": {
+                                                            "value": "@string('FAILED')",
+                                                            "type": "Expression"
+                                                        },
+                                                        "rows_processed": {
+                                                            "value": "@string('')",
+                                                            "type": "Expression"
+                                                        },
+                                                        "error_message": {
+                                                            "value": "@string('API extract fx_rates Notebook failed')",
+                                                            "type": "Expression"
+                                                        },
+                                                        "watermark_value": {
+                                                            "value": "@string('')",
+                                                            "type": "Expression"
+                                                        },
+                                                        "pipeline_name": "@pipeline().Pipeline",
+                                                        "layer": "@string('bronze')",
+                                                        "source_type": "@item().source_type",
+                                                        "source_system": "@item().source_path",
+                                                        "target_object": "@concat(item().target_path,'/',item().target_file_name)",
+                                                        "load_mode": "@item().load_mode",
+                                                        "watermark_column": "@string('')"
+                                                    }
+                                                },
+                                                "linkedServiceName": {
+                                                    "referenceName": "tlm_bank_dbx_ls",
+                                                    "type": "LinkedServiceReference"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "defaultActivities": [
+                                    {
+                                        "name": "Unknown Type - audit end",
+                                        "type": "DatabricksNotebook",
+                                        "dependsOn": [
+                                            {
+                                                "activity": "audit_start Unknown Type Notebook",
+                                                "dependencyConditions": [
+                                                    "Succeeded"
+                                                ]
+                                            }
+                                        ],
+                                        "policy": {
+                                            "timeout": "0.12:00:00",
+                                            "retry": 3,
+                                            "retryIntervalInSeconds": 30,
+                                            "secureOutput": false,
+                                            "secureInput": false
+                                        },
+                                        "userProperties": [],
+                                        "typeProperties": {
+                                            "notebookPath": "/Shared/01_audit/audit_end",
+                                            "baseParameters": {
+                                                "status": {
+                                                    "value": "@string('FAILED')",
+                                                    "type": "Expression"
+                                                },
+                                                "error_message": {
+                                                    "value": "@concat('Unknown source_type: ', item().source_type)",
+                                                    "type": "Expression"
+                                                },
+                                                "run_id": {
+                                                    "value": "@pipeline().RunId",
+                                                    "type": "Expression"
+                                                },
+                                                "source_object": {
+                                                    "value": "@string('unknown_type')",
+                                                    "type": "Expression"
+                                                },
+                                                "rows_processed": {
+                                                    "value": "@string('')\n",
+                                                    "type": "Expression"
+                                                },
+                                                "watermark_value": {
+                                                    "value": "@string('')\n",
+                                                    "type": "Expression"
+                                                },
+                                                "pipeline_name": {
+                                                    "value": "@pipeline().Pipeline",
+                                                    "type": "Expression"
+                                                },
+                                                "layer": {
+                                                    "value": "@string('bronze')",
+                                                    "type": "Expression"
+                                                },
+                                                "source_type": "@item().source_type",
+                                                "source_system": {
+                                                    "value": "@string('unknown_type')",
+                                                    "type": "Expression"
+                                                },
+                                                "target_object": {
+                                                    "value": "@string('unknown_type')",
+                                                    "type": "Expression"
+                                                },
+                                                "load_mode": {
+                                                    "value": "@string('')",
+                                                    "type": "Expression"
+                                                },
+                                                "watermark_column": {
+                                                    "value": "@string('')",
+                                                    "type": "Expression"
+                                                }
+                                            }
+                                        },
+                                        "linkedServiceName": {
+                                            "referenceName": "tlm_bank_dbx_ls",
+                                            "type": "LinkedServiceReference"
+                                        }
+                                    },
+                                    {
+                                        "name": "audit_start Unknown Type Notebook",
+                                        "type": "DatabricksNotebook",
+                                        "dependsOn": [],
+                                        "policy": {
+                                            "timeout": "0.12:00:00",
+                                            "retry": 3,
+                                            "retryIntervalInSeconds": 30,
+                                            "secureOutput": false,
+                                            "secureInput": false
+                                        },
+                                        "userProperties": [],
+                                        "typeProperties": {
+                                            "notebookPath": "/Shared/01_audit/audit_start",
+                                            "baseParameters": {
+                                                "run_id": {
+                                                    "value": "@pipeline().RunId",
+                                                    "type": "Expression"
+                                                },
+                                                "pipeline_name": {
+                                                    "value": "@pipeline().Pipeline",
+                                                    "type": "Expression"
+                                                },
+                                                "layer": {
+                                                    "value": "@string('bronze')",
+                                                    "type": "Expression"
+                                                },
+                                                "source_type": {
+                                                    "value": "@item().source_type",
+                                                    "type": "Expression"
+                                                },
+                                                "source_system": {
+                                                    "value": "@string('unknown_type')",
+                                                    "type": "Expression"
+                                                },
+                                                "source_object": {
+                                                    "value": "@string('unknown_type')",
+                                                    "type": "Expression"
+                                                },
+                                                "target_object": {
+                                                    "value": "@string('unknown_type')",
+                                                    "type": "Expression"
+                                                },
+                                                "load_mode": {
+                                                    "value": "@string('')\n",
+                                                    "type": "Expression"
+                                                },
+                                                "watermark_column": {
+                                                    "value": "@string('')\n",
+                                                    "type": "Expression"
+                                                }
+                                            }
+                                        },
+                                        "linkedServiceName": {
+                                            "referenceName": "tlm_bank_dbx_ls",
+                                            "type": "LinkedServiceReference"
+                                        }
+                                    },
+                                    {
+                                        "name": "audit_start Failed",
+                                        "type": "Fail",
+                                        "dependsOn": [
+                                            {
+                                                "activity": "audit_start Unknown Type Notebook",
+                                                "dependencyConditions": [
+                                                    "Failed"
+                                                ]
+                                            }
+                                        ],
+                                        "userProperties": [],
+                                        "typeProperties": {
+                                            "message": "audit_start Unknown Type failed – ingestion stopped",
+                                            "errorCode": "AUDIT_START_FAILED"
+                                        }
+                                    },
+                                    {
+                                        "name": "audit_end failed",
+                                        "type": "Fail",
+                                        "dependsOn": [
+                                            {
+                                                "activity": "Unknown Type - audit end",
+                                                "dependencyConditions": [
+                                                    "Failed"
+                                                ]
+                                            }
+                                        ],
+                                        "userProperties": [],
+                                        "typeProperties": {
+                                            "message": "audit_end Unknown Type failed – ingestion stopped",
+                                            "errorCode": "AUDIT_END_FAILED"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Lookup Load Config",
+                "type": "Lookup",
+                "dependsOn": [
+                    {
+                        "activity": "If Load Config Exist",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "DelimitedTextSource",
+                        "storeSettings": {
+                            "type": "AzureBlobFSReadSettings",
+                            "recursive": true,
+                            "enablePartitionDiscovery": false
+                        },
+                        "formatSettings": {
+                            "type": "DelimitedTextReadSettings"
+                        }
+                    },
+                    "dataset": {
+                        "referenceName": "generic_adls_flat_file_ds",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "container": "configs",
+                            "file_path": "ingestion",
+                            "file_name": "load_config.csv"
+                        }
+                    },
+                    "firstRowOnly": false
+                }
+            },
+            {
+                "name": "Lookup Load Config Fail",
+                "type": "Fail",
+                "dependsOn": [
+                    {
+                        "activity": "Lookup Load Config",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "message": "Lookup Load Config activity crashed",
+                    "errorCode": "CONFIG_LOOKUP_FAILED"
+                }
+            }
+        ],
+        "annotations": [],
+        "lastPublishTime": "2026-02-13T10:04:57Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,20 @@
+{
+    "name": "tlm_bank_dbx_ls",
+    "type": "Microsoft.DataFactory/factories/linkedservices",
+    "properties": {
+        "annotations": [],
+        "type": "AzureDatabricks",
+        "typeProperties": {
+            "domain": "https://adb-7405611486598625.5.azuredatabricks.net",
+            "accessToken": {
+                "type": "AzureKeyVaultSecret",
+                "store": {
+                    "referenceName": "tlm_bank_kv_ls",
+                    "type": "LinkedServiceReference"
+                },
+                "secretName": "tlm-bank-dbx-ws-pat"
+            },
+            "existingClusterId": "0206-183758-wmzuq5l3"
+        }
+    }
+}

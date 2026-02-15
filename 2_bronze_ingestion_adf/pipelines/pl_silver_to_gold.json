@@ -1,0 +1,205 @@
+{
+    "name": "pl_silver_to_gold",
+    "properties": {
+        "activities": [
+            {
+                "name": "dim_customer",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/04_gold/dim_customer"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "dim_account",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/04_gold/dim_account"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "dim_merchant",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/04_gold/dim_merchant"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "dim_counterparty",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/04_gold/dim_counterparty"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "fact_transaction",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "dim_customer",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "dim_account",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "dim_merchant",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "dim_counterparty",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/04_gold/fact_transaction"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "fact_dispute",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "dim_customer",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/04_gold/fact_dispute"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "fact_settlement",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "dim_customer",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "dim_account",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "dim_merchant",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "dim_counterparty",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Shared/04_gold/fact_settlement"
+                },
+                "linkedServiceName": {
+                    "referenceName": "tlm_bank_dbx_ls",
+                    "type": "LinkedServiceReference"
+                }
+            }
+        ],
+        "annotations": []
+    }
+}

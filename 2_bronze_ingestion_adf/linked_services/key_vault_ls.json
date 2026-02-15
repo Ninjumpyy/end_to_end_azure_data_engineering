@@ -1,0 +1,11 @@
+{
+    "name": "tlm_bank_kv_ls",
+    "type": "Microsoft.DataFactory/factories/linkedservices",
+    "properties": {
+        "annotations": [],
+        "type": "AzureKeyVault",
+        "typeProperties": {
+            "baseUrl": "https://tlm-bank-dev-kv.vault.azure.net/"
+        }
+    }
+}

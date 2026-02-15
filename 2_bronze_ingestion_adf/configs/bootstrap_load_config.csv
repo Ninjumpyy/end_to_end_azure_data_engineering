@@ -1,0 +1,15 @@
+src_container,src_file_path,src_file_name,tgt_db_name,tgt_schema_name,tgt_table_name,is_active
+bootstrap,bank_a,customers.csv,tlm-bank-a,dbo,customers,1
+bootstrap,bank_a,branches.csv,tlm-bank-a,dbo,branches,1
+bootstrap,bank_a,products.csv,tlm-bank-a,dbo,products,1
+bootstrap,bank_a,merchants.csv,tlm-bank-a,dbo,merchants,1
+bootstrap,bank_a,counterparties.csv,tlm-bank-a,dbo,counterparties,1
+bootstrap,bank_a,accounts.csv,tlm-bank-a,dbo,accounts,1
+bootstrap,bank_a,transactions.csv,tlm-bank-a,dbo,transactions,1
+bootstrap,bank_b,customers.csv,tlm-bank-b,dbo,customers,1
+bootstrap,bank_b,branches.csv,tlm-bank-b,dbo,branches,1
+bootstrap,bank_b,products.csv,tlm-bank-b,dbo,products,1
+bootstrap,bank_b,merchants.csv,tlm-bank-b,dbo,merchants,1
+bootstrap,bank_b,counterparties.csv,tlm-bank-b,dbo,counterparties,1
+bootstrap,bank_b,accounts.csv,tlm-bank-b,dbo,accounts,1
+bootstrap,bank_b,transactions.csv,tlm-bank-b,dbo,transactions,1
