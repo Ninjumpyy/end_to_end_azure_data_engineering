@@ -66,12 +66,9 @@ Performance could be improved through additional Delta Lake optimizations such a
 
 ## Scripts for Project
 
-[Bronze Ingestion Pipeline](2_bronze_ingestion_adf/pipelines/pl_ingestion_bronze.json)
-
-[Silver Pipeline](2_bronze_ingestion_adf/pipelines/pl_bronze_to_silver.json)
-
-[Gold Pipeline](2_bronze_ingestion_adf/pipelines/pl_silver_to_gold.json)
-
-[Master Pipeline](2_bronze_ingestion_adf/pipelines/pl_master.json)
+1. [Bronze Ingestion Pipeline](2_bronze_ingestion_adf/pipelines/pl_ingestion_bronze.json)
+2. [Silver Pipeline](2_bronze_ingestion_adf/pipelines/pl_bronze_to_silver.json)
+3. [Gold Pipeline](2_bronze_ingestion_adf/pipelines/pl_silver_to_gold.json)
+4. [Master Pipeline](2_bronze_ingestion_adf/pipelines/pl_master.json)
 
 ---
