@@ -1,0 +1,11 @@
+branch_id,branch_name,city,country
+BR001,BankA Luxembourg,Luxembourg,Luxembourg
+BR002,BankA Esch-sur-Alzette,Esch-sur-Alzette,Luxembourg
+BR003,BankA Differdange,Differdange,Luxembourg
+BR004,BankA Dudelange,Dudelange,Luxembourg
+BR005,BankA Trier,Trier,Germany
+BR006,BankA Saarbrucken,Saarbrucken,Germany
+BR007,BankA Metz,Metz,France
+BR008,BankA Thionville,Thionville,France
+BR009,BankA Arlon,Arlon,Belgium
+BR010,BankA Basel,Basel,Switzerland

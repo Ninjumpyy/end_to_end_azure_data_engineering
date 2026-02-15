@@ -1,0 +1,11 @@
+branch_id,branch_name,city,country
+BR001,BankB Luxembourg,Luxembourg,Luxembourg
+BR002,BankB Ettelbruck,Ettelbruck,Luxembourg
+BR003,BankB Diekirch,Diekirch,Luxembourg
+BR004,BankB Wiltz,Wiltz,Luxembourg
+BR005,BankB Nancy,Nancy,France
+BR006,BankB Metz,Metz,France
+BR007,BankB Trier,Trier,Germany
+BR008,BankB Brussels,Brussels,Belgium
+BR009,BankB Liege,Liege,Belgium
+BR010,BankB Basel,Basel,Switzerland
