@@ -1,0 +1,401 @@
+counterparty_id,counterparty_name,counterparty_type,bank_bic,country
+CP000001,Laura Cox,PERSONAL,,Luxembourg
+CP000002,Daniel Gallet-Henry,PERSONAL,,Luxembourg
+CP000003,Abdul Hopkins-Oliver,PERSONAL,,Germany
+CP000004,Franck Rey,PERSONAL,,France
+CP000005,James Moore,PERSONAL,,France
+CP000006,Bruce Kaur,PERSONAL,,France
+CP000007,Laurence Robert,PERSONAL,,Luxembourg
+CP000008,Marianne Lopes,PERSONAL,,Switzerland
+CP000009,Jean de Morin,PERSONAL,,Luxembourg
+CP000010,Hans Jürgen Kaul,PERSONAL,,Switzerland
+CP000011,Gemma Elliott-Wilkinson,PERSONAL,,Belgium
+CP000012,Karl-Dieter Hornig,PERSONAL,,Luxembourg
+CP000013,Jeremy Mellor,PERSONAL,,Luxembourg
+CP000014,Gemma Adams,PERSONAL,,Luxembourg
+CP000015,Stanislaus Heintze,PERSONAL,,France
+CP000016,Laurence De Sousa,PERSONAL,,France
+CP000017,Dr Jonathan Middleton,PERSONAL,,Switzerland
+CP000018,Zacharie-Tristan Guérin,PERSONAL,,Switzerland
+CP000019,Graham Wilkinson,PERSONAL,,Luxembourg
+CP000020,Nicolas Gillet,PERSONAL,,Switzerland
+CP000021,Univ.Prof. Gotthilf Wilmsen B.Sc.,PERSONAL,,France
+CP000022,Hugues Maréchal,PERSONAL,,Switzerland
+CP000023,Ehrenfried Rosenow,PERSONAL,,Belgium
+CP000024,Ms Jill Morley,PERSONAL,,France
+CP000025,Steven Pritchard,PERSONAL,,Belgium
+CP000026,Julie Letellier-Mary,PERSONAL,,Switzerland
+CP000027,Greta Hartmann-Etzler,PERSONAL,,Germany
+CP000028,Jordan Davey,PERSONAL,,Luxembourg
+CP000029,Thomas Leroux,PERSONAL,,France
+CP000030,Mrs Lorraine Palmer,PERSONAL,,Belgium
+CP000031,Yasmin Röhrdanz,PERSONAL,,Germany
+CP000032,Zacharie Regnier,PERSONAL,,Germany
+CP000033,Beate Hornig,PERSONAL,,France
+CP000034,Dipl.-Ing. Abraham Ullmann,PERSONAL,,France
+CP000035,Lynda Carter-Buckley,PERSONAL,,Germany
+CP000036,Timothée Guillou de la Brunet,PERSONAL,,Luxembourg
+CP000037,Prof. Winfried Wulff,PERSONAL,,Luxembourg
+CP000038,Abbie Duncan,PERSONAL,,Belgium
+CP000039,Jules Le Gall,PERSONAL,,Luxembourg
+CP000040,Georges Duhamel,PERSONAL,,Germany
+CP000041,Patrick Muller,PERSONAL,,Germany
+CP000042,Mr Philip Knowles,PERSONAL,,Switzerland
+CP000043,Holly Hill,PERSONAL,,Germany
+CP000044,Ms Kayleigh Mitchell,PERSONAL,,Luxembourg
+CP000045,Denise Matthews,PERSONAL,,Belgium
+CP000046,Christian Williams,PERSONAL,,Switzerland
+CP000047,Darren Smith,PERSONAL,,Luxembourg
+CP000048,Aimée Pruvost,PERSONAL,,Belgium
+CP000049,Francesca Quinn,PERSONAL,,Luxembourg
+CP000050,Gabriel Mercier,PERSONAL,,Switzerland
+CP000051,Arnaude Buisson,PERSONAL,,Germany
+CP000052,Xavier-Patrick Benoit,PERSONAL,,Switzerland
+CP000053,Jemma Allen,PERSONAL,,Germany
+CP000054,Odette Aubert,PERSONAL,,Switzerland
+CP000055,Vincent Perret,PERSONAL,,France
+CP000056,Dipl.-Ing. Irmtraut Vollbrecht,PERSONAL,,Luxembourg
+CP000057,Antoine Antoine,PERSONAL,,Luxembourg
+CP000058,Mrs Catherine Bates,PERSONAL,,France
+CP000059,Brian Oliver,PERSONAL,,Germany
+CP000060,Elfie Bruder MBA.,PERSONAL,,Luxembourg
+CP000061,Jessica Riley,PERSONAL,,France
+CP000062,Mr Jordan Bennett,PERSONAL,,Luxembourg
+CP000063,Lucas Vallée,PERSONAL,,Belgium
+CP000064,Steven Kühnert B.Sc.,PERSONAL,,Germany
+CP000065,Adélaïde Perrier,PERSONAL,,Belgium
+CP000066,Eva Löchel MBA.,PERSONAL,,Germany
+CP000067,William de la Boyer,PERSONAL,,France
+CP000068,Mathew Long-Sinclair,PERSONAL,,Germany
+CP000069,Valentine-Camille Laporte,PERSONAL,,Germany
+CP000070,Pierre Faure,PERSONAL,,France
+CP000071,Théophile Mercier,PERSONAL,,Germany
+CP000072,Mr Reece Baldwin,PERSONAL,,Luxembourg
+CP000073,Leah Wright,PERSONAL,,Switzerland
+CP000074,Anna Moss,PERSONAL,,France
+CP000075,Charles Hudson,PERSONAL,,Switzerland
+CP000076,Isabelle Aubry,PERSONAL,,France
+CP000077,Micha Seidel-Jacob,PERSONAL,,France
+CP000078,Uschi Weitzel,PERSONAL,,Belgium
+CP000079,Michel Loiseau,PERSONAL,,Belgium
+CP000080,Deborah Powell,PERSONAL,,Germany
+CP000081,Emily McDonald-Wallace,PERSONAL,,Switzerland
+CP000082,Lorraine Barbier,PERSONAL,,France
+CP000083,Lore Söding,PERSONAL,,Germany
+CP000084,Charlene Warren,PERSONAL,,Luxembourg
+CP000085,Walter Eimer,PERSONAL,,France
+CP000086,Tilman Döring,PERSONAL,,Luxembourg
+CP000087,Martin Sharpe,PERSONAL,,Germany
+CP000088,Kerry Martin,PERSONAL,,Belgium
+CP000089,Dr Howard Jones,PERSONAL,,Germany
+CP000090,Timothée Briand,PERSONAL,,Luxembourg
+CP000091,Abraham Kade,PERSONAL,,France
+CP000092,Édouard-Matthieu Courtois,PERSONAL,,Switzerland
+CP000093,Mrs Victoria Tucker,PERSONAL,,Germany
+CP000094,Teresa Fowler,PERSONAL,,France
+CP000095,Heinz-Dieter Eckbauer-Berger,PERSONAL,,Belgium
+CP000096,Tanja Benthin,PERSONAL,,Belgium
+CP000097,Mirco Hering B.Sc.,PERSONAL,,Belgium
+CP000098,Prof. Nermin Förster,PERSONAL,,France
+CP000099,Emmanuel Pasquier,PERSONAL,,Germany
+CP000100,Jacques Bouchet,PERSONAL,,France
+CP000101,Mr Aaron Walsh,PERSONAL,,France
+CP000102,Janice Carr,PERSONAL,,Switzerland
+CP000103,Dr. Rüdiger Mies B.Eng.,PERSONAL,,Switzerland
+CP000104,Dr. Aleksander Sorgatz B.A.,PERSONAL,,Germany
+CP000105,Erna Bohnbach,PERSONAL,,Switzerland
+CP000106,Manuela Pechel,PERSONAL,,Belgium
+CP000107,Vera Baum,PERSONAL,,Switzerland
+CP000108,Emmanuel-Stéphane Aubry,PERSONAL,,Belgium
+CP000109,Théophile Gay,PERSONAL,,Germany
+CP000110,Ilonka auch Schlauchin,PERSONAL,,France
+CP000111,Lorraine Sutton,PERSONAL,,France
+CP000112,Alphonse-Martin Martin,PERSONAL,,Switzerland
+CP000113,Mr Justin Williams,PERSONAL,,Belgium
+CP000114,Miss Joyce Baker,PERSONAL,,Luxembourg
+CP000115,Tina Gordon-Miles,PERSONAL,,Luxembourg
+CP000116,Kreszentia Eckbauer,PERSONAL,,Luxembourg
+CP000117,Monique Labbé,PERSONAL,,France
+CP000118,Cheryl Pearce,PERSONAL,,France
+CP000119,Gerfried Hörle,PERSONAL,,Belgium
+CP000120,Margot Turpin,PERSONAL,,Switzerland
+CP000121,Marietta Hamann MBA.,PERSONAL,,Luxembourg
+CP000122,Lydia Cunningham,PERSONAL,,Belgium
+CP000123,Elliott Bibi,PERSONAL,,Belgium
+CP000124,Yves Ruiz-Jean,PERSONAL,,Switzerland
+CP000125,Alexandre Lambert,PERSONAL,,Belgium
+CP000126,Arnaude Pineau,PERSONAL,,Switzerland
+CP000127,Oscar Textor MBA.,PERSONAL,,Germany
+CP000128,Elena Finke-Sölzer,PERSONAL,,Switzerland
+CP000129,Michelle Marsh,PERSONAL,,Luxembourg
+CP000130,Raymond Barthelemy,PERSONAL,,Luxembourg
+CP000131,Jeanne Rivière-Pineau,PERSONAL,,Switzerland
+CP000132,Margaud Faivre,PERSONAL,,Germany
+CP000133,Prof. Ingelore Freudenberger,PERSONAL,,Germany
+CP000134,Dr Eric Smith,PERSONAL,,Luxembourg
+CP000135,Raymond-Patrick Toussaint,PERSONAL,,Germany
+CP000136,Matthieu-Auguste Delannoy,PERSONAL,,Belgium
+CP000137,Ing. Gundolf Juncken B.Sc.,PERSONAL,,France
+CP000138,Gabriel Jacob,PERSONAL,,Belgium
+CP000139,Lindsey Stevens,PERSONAL,,Luxembourg
+CP000140,Ing. Kerstin Mohaupt,PERSONAL,,Germany
+CP000141,Edward Linke,PERSONAL,,Switzerland
+CP000142,Stanislaw Wieloch,PERSONAL,,France
+CP000143,Dr Sarah Hewitt,PERSONAL,,Switzerland
+CP000144,Silke Lindner-Renner,PERSONAL,,Luxembourg
+CP000145,Abdul Roberts-Bartlett,PERSONAL,,Germany
+CP000146,Ing. Heinz-Josef Neureuther B.Sc.,PERSONAL,,Switzerland
+CP000147,Marie-Louise Stiebitz,PERSONAL,,Switzerland
+CP000148,Dipl.-Ing. Vassilios Eckbauer,PERSONAL,,France
+CP000149,James Walker,PERSONAL,,France
+CP000150,Mohamed Payne,PERSONAL,,Germany
+CP000151,Ms Kate Clayton,PERSONAL,,France
+CP000152,Gaby Hahn-Metz,PERSONAL,,Switzerland
+CP000153,Olena Kramer,PERSONAL,,Switzerland
+CP000154,Ing. Saskia Butte,PERSONAL,,Luxembourg
+CP000155,Philip Reuter,PERSONAL,,Switzerland
+CP000156,Hélène Delahaye,PERSONAL,,Germany
+CP000157,Alexandre Hoarau,PERSONAL,,Belgium
+CP000158,Thierry Brunet,PERSONAL,,Luxembourg
+CP000159,Noël Laroche,PERSONAL,,Luxembourg
+CP000160,Gabrielle-Suzanne Bonnin,PERSONAL,,Germany
+CP000161,Charlotte auch Schlauchin,PERSONAL,,Germany
+CP000162,Kevin Hobbs-O'Brien,PERSONAL,,France
+CP000163,Klaas Bauer,PERSONAL,,Luxembourg
+CP000164,Heidelore Trubin-Gumprich,PERSONAL,,France
+CP000165,Jacqueline-Caroline Grenier,PERSONAL,,Switzerland
+CP000166,Rocco Rosemann,PERSONAL,,Luxembourg
+CP000167,Pénélope Peltier,PERSONAL,,Luxembourg
+CP000168,Janus Seifert,PERSONAL,,Belgium
+CP000169,Silvester Linke,PERSONAL,,Luxembourg
+CP000170,Heinz-Günter Klotz,PERSONAL,,Switzerland
+CP000171,Dr Owen Gould,PERSONAL,,France
+CP000172,Laetitia du Turpin,PERSONAL,,France
+CP000173,Friedlinde Henschel,PERSONAL,,Belgium
+CP000174,Maurice-Gérard Hamel,PERSONAL,,Switzerland
+CP000175,Gerlind Baum-Oderwald,PERSONAL,,France
+CP000176,Dipl.-Ing. Ehrhard Klapp,PERSONAL,,Germany
+CP000177,Ernestine Schenk,PERSONAL,,Switzerland
+CP000178,Ashleigh Boyle-Wells,PERSONAL,,Switzerland
+CP000179,Lucas Camus-Berthelot,PERSONAL,,Belgium
+CP000180,Victoire Pons,PERSONAL,,France
+CP000181,Alpine Industries,EMPLOYER,FSOZSWPT,Switzerland
+CP000182,Alpine Industries,EMPLOYER,LXEJFRWB,France
+CP000183,Global Consulting SARL,EMPLOYER,JVWSGERT,Germany
+CP000184,Global Consulting SARL,EMPLOYER,OHUMGEHV,Germany
+CP000185,Global Consulting SARL,EMPLOYER,WSLMSWVE,Switzerland
+CP000186,EuroFinance Group,EMPLOYER,ULWHLUSG,Luxembourg
+CP000187,LuxTech SA,EMPLOYER,SOXLFRAT,France
+CP000188,LuxTech SA,EMPLOYER,IRCDGESS,Germany
+CP000189,Nordic Systems,EMPLOYER,OWFGSWKS,Switzerland
+CP000190,Nordic Systems,EMPLOYER,ECVLFRQE,France
+CP000191,LuxTech SA,EMPLOYER,EZFEFROR,France
+CP000192,Alpine Industries,EMPLOYER,JJZKLUFP,Luxembourg
+CP000193,EuroFinance Group,EMPLOYER,JWAMLUYN,Luxembourg
+CP000194,LuxTech SA,EMPLOYER,XHYCLUTL,Luxembourg
+CP000195,LuxTech SA,EMPLOYER,TKNDGEVG,Germany
+CP000196,EuroFinance Group,EMPLOYER,ONQQSWKP,Switzerland
+CP000197,Alpine Industries,EMPLOYER,JEKAGECS,Germany
+CP000198,EuroFinance Group,EMPLOYER,ESCOBETS,Belgium
+CP000199,EuroFinance Group,EMPLOYER,DEROSWYY,Switzerland
+CP000200,Nordic Systems,EMPLOYER,LQZMSWHI,Switzerland
+CP000201,EuroFinance Group,EMPLOYER,PJRJBEDK,Belgium
+CP000202,Global Consulting SARL,EMPLOYER,MVKSBEHD,Belgium
+CP000203,LuxTech SA,EMPLOYER,TSZRFRIF,France
+CP000204,Alpine Industries,EMPLOYER,FMCBLUUM,Luxembourg
+CP000205,Central IT Solutions,EMPLOYER,BFORBELB,Belgium
+CP000206,Global Consulting SARL,EMPLOYER,RKCWBEEH,Belgium
+CP000207,Alpine Industries,EMPLOYER,CRLLBEOF,Belgium
+CP000208,Alpine Industries,EMPLOYER,EWAVLUQG,Luxembourg
+CP000209,LuxTech SA,EMPLOYER,VASFLUQZ,Luxembourg
+CP000210,Alpine Industries,EMPLOYER,CDFUBEUH,Belgium
+CP000211,LuxTech SA,EMPLOYER,GAQIGEAD,Germany
+CP000212,EuroFinance Group,EMPLOYER,HXNWFROC,France
+CP000213,Nordic Systems,EMPLOYER,NRJIFRCS,France
+CP000214,EuroFinance Group,EMPLOYER,HBOMBETK,Belgium
+CP000215,EuroFinance Group,EMPLOYER,JAJABEOH,Belgium
+CP000216,Global Consulting SARL,EMPLOYER,HPJFGESG,Germany
+CP000217,LuxTech SA,EMPLOYER,RAEEFRDJ,France
+CP000218,Nordic Systems,EMPLOYER,YMMGBEIE,Belgium
+CP000219,LuxTech SA,EMPLOYER,XYAVLURA,Luxembourg
+CP000220,LuxTech SA,EMPLOYER,UTLLSWFJ,Switzerland
+CP000221,EuroFinance Group,EMPLOYER,IEWVLUWI,Luxembourg
+CP000222,Global Consulting SARL,EMPLOYER,DUMSFRKY,France
+CP000223,Global Consulting SARL,EMPLOYER,XACUBEET,Belgium
+CP000224,Global Consulting SARL,EMPLOYER,YQYPFRFC,France
+CP000225,EuroFinance Group,EMPLOYER,GLVGLUGH,Luxembourg
+CP000226,LuxTech SA,EMPLOYER,AUJABEJE,Belgium
+CP000227,Central IT Solutions,EMPLOYER,YQVNBEZP,Belgium
+CP000228,Central IT Solutions,EMPLOYER,VRIYBEOT,Belgium
+CP000229,Alpine Industries,EMPLOYER,ICNEBEOR,Belgium
+CP000230,Alpine Industries,EMPLOYER,OVFBSWWO,Switzerland
+CP000231,EuroFinance Group,EMPLOYER,GCKSBEBC,Belgium
+CP000232,Central IT Solutions,EMPLOYER,YDSWFRBJ,France
+CP000233,LuxTech SA,EMPLOYER,HAKRFRKL,France
+CP000234,Alpine Industries,EMPLOYER,NYNRSWFL,Switzerland
+CP000235,LuxTech SA,EMPLOYER,ODOQSWQQ,Switzerland
+CP000236,LuxTech SA,EMPLOYER,ZDSRGEKE,Germany
+CP000237,Nordic Systems,EMPLOYER,WLTOLUSQ,Luxembourg
+CP000238,Nordic Systems,EMPLOYER,TMYEBEPY,Belgium
+CP000239,EuroFinance Group,EMPLOYER,WKSSSWBQ,Switzerland
+CP000240,Nordic Systems,EMPLOYER,RAKRLUDM,Luxembourg
+CP000241,EuroFinance Group,EMPLOYER,FSXZLUMZ,Luxembourg
+CP000242,Nordic Systems,EMPLOYER,OOMNLURW,Luxembourg
+CP000243,Alpine Industries,EMPLOYER,XQRILUGO,Luxembourg
+CP000244,Global Consulting SARL,EMPLOYER,CTYCFRLX,France
+CP000245,Nordic Systems,EMPLOYER,IFSULUAL,Luxembourg
+CP000246,Nordic Systems,EMPLOYER,IYIXFRGR,France
+CP000247,LuxTech SA,EMPLOYER,QEZSSWVZ,Switzerland
+CP000248,LuxTech SA,EMPLOYER,DEJWSWRU,Switzerland
+CP000249,Alpine Industries,EMPLOYER,ZZJXBEYZ,Belgium
+CP000250,Nordic Systems,EMPLOYER,QIHDSWRV,Switzerland
+CP000251,Central IT Solutions,EMPLOYER,QLYOSWGR,Switzerland
+CP000252,EuroFinance Group,EMPLOYER,EBNJGENO,Germany
+CP000253,EuroFinance Group,EMPLOYER,EODSGEPA,Germany
+CP000254,Global Consulting SARL,EMPLOYER,ICCTGEHG,Germany
+CP000255,Alpine Industries,EMPLOYER,IIYDFRQV,France
+CP000256,Global Consulting SARL,EMPLOYER,IALVGEJA,Germany
+CP000257,LuxTech SA,EMPLOYER,GFNAGECS,Germany
+CP000258,Global Consulting SARL,EMPLOYER,NCCPLUGR,Luxembourg
+CP000259,Nordic Systems,EMPLOYER,IPWDSWRM,Switzerland
+CP000260,LuxTech SA,EMPLOYER,DFQNLUOM,Luxembourg
+CP000261,RealEstate Holdings SA,LANDLORD,DYVPSWYK,Switzerland
+CP000262,City Property Management,LANDLORD,EWJNSWNO,Switzerland
+CP000263,City Property Management,LANDLORD,XJYMFRRJ,France
+CP000264,RealEstate Holdings SA,LANDLORD,IQZLLUQB,Luxembourg
+CP000265,City Property Management,LANDLORD,AWYYGELU,Germany
+CP000266,GreenHomes Group,LANDLORD,LQDIFRAH,France
+CP000267,City Property Management,LANDLORD,VEECSWGL,Switzerland
+CP000268,Urban Living SARL,LANDLORD,CGONSWUY,Switzerland
+CP000269,City Property Management,LANDLORD,HTDPSWDE,Switzerland
+CP000270,RealEstate Holdings SA,LANDLORD,BRGFLUCE,Luxembourg
+CP000271,Urban Living SARL,LANDLORD,UMJEGERN,Germany
+CP000272,RealEstate Holdings SA,LANDLORD,LJTULUMH,Luxembourg
+CP000273,City Property Management,LANDLORD,DGMBGEYS,Germany
+CP000274,RealEstate Holdings SA,LANDLORD,PPXJSWNB,Switzerland
+CP000275,RealEstate Holdings SA,LANDLORD,OAVDGEAU,Germany
+CP000276,GreenHomes Group,LANDLORD,UBUQGEXJ,Germany
+CP000277,Urban Living SARL,LANDLORD,EEFFGEBG,Germany
+CP000278,GreenHomes Group,LANDLORD,VXZILUDL,Luxembourg
+CP000279,Urban Living SARL,LANDLORD,JVQHGEWQ,Germany
+CP000280,City Property Management,LANDLORD,UDSMLUWG,Luxembourg
+CP000281,City Property Management,LANDLORD,GNJQFROG,France
+CP000282,GreenHomes Group,LANDLORD,JXHWFRKO,France
+CP000283,GreenHomes Group,LANDLORD,JXNNSWPJ,Switzerland
+CP000284,Urban Living SARL,LANDLORD,MQSRSWLR,Switzerland
+CP000285,Urban Living SARL,LANDLORD,WTVWLULJ,Luxembourg
+CP000286,Urban Living SARL,LANDLORD,QZEJFROB,France
+CP000287,RealEstate Holdings SA,LANDLORD,VHNYGEDV,Germany
+CP000288,RealEstate Holdings SA,LANDLORD,XTUUBEMF,Belgium
+CP000289,City Property Management,LANDLORD,JKWNLURF,Luxembourg
+CP000290,Urban Living SARL,LANDLORD,CQBFGECA,Germany
+CP000291,RealEstate Holdings SA,LANDLORD,NWGHGEBH,Germany
+CP000292,Urban Living SARL,LANDLORD,RRLFFRQT,France
+CP000293,GreenHomes Group,LANDLORD,OZMDGENT,Germany
+CP000294,RealEstate Holdings SA,LANDLORD,XIWQSWUH,Switzerland
+CP000295,RealEstate Holdings SA,LANDLORD,FVBLFRYI,France
+CP000296,GreenHomes Group,LANDLORD,OGJQFREZ,France
+CP000297,RealEstate Holdings SA,LANDLORD,CBBDLUUK,Luxembourg
+CP000298,GreenHomes Group,LANDLORD,KZTOGESH,Germany
+CP000299,City Property Management,LANDLORD,BUKZFRDS,France
+CP000300,Urban Living SARL,LANDLORD,FBGPFRLZ,France
+CP000301,Urban Living SARL,LANDLORD,FZTVBEOV,Belgium
+CP000302,RealEstate Holdings SA,LANDLORD,EGOHBEGM,Belgium
+CP000303,GreenHomes Group,LANDLORD,WUPJFRGJ,France
+CP000304,City Property Management,LANDLORD,MLMJGEEL,Germany
+CP000305,RealEstate Holdings SA,LANDLORD,FDWKFRCR,France
+CP000306,RealEstate Holdings SA,LANDLORD,PONULUUJ,Luxembourg
+CP000307,City Property Management,LANDLORD,EECOBEYR,Belgium
+CP000308,Urban Living SARL,LANDLORD,DWGEGEDC,Germany
+CP000309,City Property Management,LANDLORD,DXSEGEFN,Germany
+CP000310,GreenHomes Group,LANDLORD,GYDLSWYV,Switzerland
+CP000311,City Property Management,LANDLORD,CZKPSWUM,Switzerland
+CP000312,Urban Living SARL,LANDLORD,GJDCLUZV,Luxembourg
+CP000313,RealEstate Holdings SA,LANDLORD,FGPLGEPT,Germany
+CP000314,City Property Management,LANDLORD,CHHNSWXX,Switzerland
+CP000315,Urban Living SARL,LANDLORD,YAXVLUMD,Luxembourg
+CP000316,GreenHomes Group,LANDLORD,PVEVSWJR,Switzerland
+CP000317,City Property Management,LANDLORD,SQUQGEJV,Germany
+CP000318,Urban Living SARL,LANDLORD,LQJWBEPS,Belgium
+CP000319,RealEstate Holdings SA,LANDLORD,ZIMTBETJ,Belgium
+CP000320,Urban Living SARL,LANDLORD,PYVIGESV,Germany
+CP000321,Consulting Plus,BUSINESS,HFPQBEGX,Belgium
+CP000322,Logistics Partner,BUSINESS,XTLNSWXF,Switzerland
+CP000323,Maintenance Pro,BUSINESS,OIJEFRYG,France
+CP000324,Consulting Plus,BUSINESS,XIVHBEQV,Belgium
+CP000325,Logistics Partner,BUSINESS,IMYJGELS,Germany
+CP000326,Consulting Plus,BUSINESS,ZKUCGEAX,Germany
+CP000327,Logistics Partner,BUSINESS,UPCNGEWV,Germany
+CP000328,Office Supplies Co,BUSINESS,OIPTGEMX,Germany
+CP000329,Office Supplies Co,BUSINESS,KCDXGEXY,Germany
+CP000330,Logistics Partner,BUSINESS,HAKMGEIQ,Germany
+CP000331,IT Services Europe,BUSINESS,PEXJFRTH,France
+CP000332,Office Supplies Co,BUSINESS,SFWKBECG,Belgium
+CP000333,Logistics Partner,BUSINESS,BFOCFRBA,France
+CP000334,Maintenance Pro,BUSINESS,ZGXPSWFX,Switzerland
+CP000335,Logistics Partner,BUSINESS,BUGTBEVY,Belgium
+CP000336,Maintenance Pro,BUSINESS,ICSELUIW,Luxembourg
+CP000337,IT Services Europe,BUSINESS,ECNAGEBQ,Germany
+CP000338,Logistics Partner,BUSINESS,JJUMBEBH,Belgium
+CP000339,Maintenance Pro,BUSINESS,PTHDSWAO,Switzerland
+CP000340,Office Supplies Co,BUSINESS,DEHFBEIB,Belgium
+CP000341,IT Services Europe,BUSINESS,GKPTBESB,Belgium
+CP000342,Office Supplies Co,BUSINESS,NWPKSWLQ,Switzerland
+CP000343,Consulting Plus,BUSINESS,FHXEFRIG,France
+CP000344,Logistics Partner,BUSINESS,JBYEGEOY,Germany
+CP000345,Maintenance Pro,BUSINESS,QVBWSWWP,Switzerland
+CP000346,IT Services Europe,BUSINESS,QOGXLUVW,Luxembourg
+CP000347,IT Services Europe,BUSINESS,ICWIGEPL,Germany
+CP000348,IT Services Europe,BUSINESS,DSEOFRZI,France
+CP000349,Consulting Plus,BUSINESS,TXDCLUMC,Luxembourg
+CP000350,Office Supplies Co,BUSINESS,CUTGFRIE,France
+CP000351,Consulting Plus,BUSINESS,CWPMSWWX,Switzerland
+CP000352,Office Supplies Co,BUSINESS,PVRHBEBZ,Belgium
+CP000353,IT Services Europe,BUSINESS,CYVLSWSF,Switzerland
+CP000354,Office Supplies Co,BUSINESS,ZHRZBEUB,Belgium
+CP000355,IT Services Europe,BUSINESS,BMLIBEUG,Belgium
+CP000356,Consulting Plus,BUSINESS,UQSTFRMT,France
+CP000357,Office Supplies Co,BUSINESS,KSCWLUCU,Luxembourg
+CP000358,IT Services Europe,BUSINESS,NBROFREQ,France
+CP000359,Office Supplies Co,BUSINESS,ZXGZSWRK,Switzerland
+CP000360,Logistics Partner,BUSINESS,JMRYLUCI,Luxembourg
+CP000361,Consulting Plus,BUSINESS,PXPXFRYK,France
+CP000362,IT Services Europe,BUSINESS,MJRCBEXC,Belgium
+CP000363,Logistics Partner,BUSINESS,KIHXBEUP,Belgium
+CP000364,Logistics Partner,BUSINESS,PHBVSWFH,Switzerland
+CP000365,Office Supplies Co,BUSINESS,JHQXGETC,Germany
+CP000366,Logistics Partner,BUSINESS,NSSFSWHI,Switzerland
+CP000367,Logistics Partner,BUSINESS,CLTCBEZR,Belgium
+CP000368,IT Services Europe,BUSINESS,QWTEBEIS,Belgium
+CP000369,Office Supplies Co,BUSINESS,KTTSBELY,Belgium
+CP000370,IT Services Europe,BUSINESS,GOHMGEPY,Germany
+CP000371,Logistics Partner,BUSINESS,BXJKGEDZ,Germany
+CP000372,IT Services Europe,BUSINESS,INFEBEZT,Belgium
+CP000373,Office Supplies Co,BUSINESS,EHAXGEKE,Germany
+CP000374,Maintenance Pro,BUSINESS,UPECLURH,Luxembourg
+CP000375,Maintenance Pro,BUSINESS,IXJOFRLX,France
+CP000376,Maintenance Pro,BUSINESS,BGDHGEJT,Germany
+CP000377,Consulting Plus,BUSINESS,KUTOSWHS,Switzerland
+CP000378,IT Services Europe,BUSINESS,QMOJFRIO,France
+CP000379,Office Supplies Co,BUSINESS,NIFGFRKL,France
+CP000380,IT Services Europe,BUSINESS,JKQNFRMV,France
+CP000381,Credit Suisse,FINANCIAL_INSTITUTION,CBFCLUXK,Luxembourg
+CP000382,ING Belgium,FINANCIAL_INSTITUTION,PNXKBENO,Belgium
+CP000383,Credit Suisse,FINANCIAL_INSTITUTION,FOISSWTE,Switzerland
+CP000384,BNP Paribas,FINANCIAL_INSTITUTION,ZZRZBEDE,Belgium
+CP000385,Credit Suisse,FINANCIAL_INSTITUTION,DKCAFRDN,France
+CP000386,Banque Internationale Luxembourg,FINANCIAL_INSTITUTION,MJUTBEUW,Belgium
+CP000387,Banque Internationale Luxembourg,FINANCIAL_INSTITUTION,IWXGLUGU,Luxembourg
+CP000388,Credit Suisse,FINANCIAL_INSTITUTION,DHRCBEJG,Belgium
+CP000389,ING Belgium,FINANCIAL_INSTITUTION,SYNALUKU,Luxembourg
+CP000390,Credit Suisse,FINANCIAL_INSTITUTION,UUMWGEFG,Germany
+CP000391,Banque Internationale Luxembourg,FINANCIAL_INSTITUTION,FTFBBEZG,Belgium
+CP000392,Banque Internationale Luxembourg,FINANCIAL_INSTITUTION,PNLWSWDS,Switzerland
+CP000393,Credit Suisse,FINANCIAL_INSTITUTION,MPREFRIA,France
+CP000394,ING Belgium,FINANCIAL_INSTITUTION,BIQUFRWZ,France
+CP000395,Credit Suisse,FINANCIAL_INSTITUTION,CZDKBEMX,Belgium
+CP000396,Credit Suisse,FINANCIAL_INSTITUTION,SEYGLUWJ,Luxembourg
+CP000397,Credit Suisse,FINANCIAL_INSTITUTION,NRNHGEGZ,Germany
+CP000398,Credit Suisse,FINANCIAL_INSTITUTION,YVJXFRMM,France
+CP000399,Banque Internationale Luxembourg,FINANCIAL_INSTITUTION,ZGCCFRIT,France
+CP000400,BNP Paribas,FINANCIAL_INSTITUTION,ZEHDSWMG,Switzerland

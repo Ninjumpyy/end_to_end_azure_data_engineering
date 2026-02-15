@@ -1,0 +1,201 @@
+merchant_id,merchant_name,mcc_code,country,city
+MRC000001,FreshMart Esch-sur-Alzette,5411,Luxembourg,Esch-sur-Alzette
+MRC000002,Dudelange Supermarket,5411,Luxembourg,Dudelange
+MRC000003,FreshMart Arlon,5411,Belgium,Arlon
+MRC000004,FreshMart Luxembourg,5411,Luxembourg,Luxembourg
+MRC000005,FreshMart Dudelange,5411,Luxembourg,Dudelange
+MRC000006,MarketPlus Arlon,5411,Belgium,Arlon
+MRC000007,GreenFood Basel,5411,Switzerland,Basel
+MRC000008,MarketPlus Differdange,5411,Luxembourg,Differdange
+MRC000009,Differdange Supermarket,5411,Luxembourg,Differdange
+MRC000010,FreshMart Esch-sur-Alzette,5411,Luxembourg,Esch-sur-Alzette
+MRC000011,GreenFood Saarbrucken,5411,Germany,Saarbrucken
+MRC000012,MarketPlus Luxembourg,5411,Luxembourg,Luxembourg
+MRC000013,FreshMart Metz,5411,France,Metz
+MRC000014,GreenFood Basel,5411,Switzerland,Basel
+MRC000015,FreshMart Esch-sur-Alzette,5411,Luxembourg,Esch-sur-Alzette
+MRC000016,FreshMart Trier,5411,Germany,Trier
+MRC000017,MarketPlus Esch-sur-Alzette,5411,Luxembourg,Esch-sur-Alzette
+MRC000018,Saarbrucken Supermarket,5411,Germany,Saarbrucken
+MRC000019,GreenFood Dudelange,5411,Luxembourg,Dudelange
+MRC000020,Basel Supermarket,5411,Switzerland,Basel
+MRC000021,MarketPlus Differdange,5411,Luxembourg,Differdange
+MRC000022,Arlon Supermarket,5411,Belgium,Arlon
+MRC000023,Luxembourg Supermarket,5411,Luxembourg,Luxembourg
+MRC000024,MarketPlus Saarbrucken,5411,Germany,Saarbrucken
+MRC000025,GreenFood Dudelange,5411,Luxembourg,Dudelange
+MRC000026,MarketPlus Metz,5411,France,Metz
+MRC000027,Differdange Supermarket,5411,Luxembourg,Differdange
+MRC000028,MarketPlus Basel,5411,Switzerland,Basel
+MRC000029,Saarbrucken Supermarket,5411,Germany,Saarbrucken
+MRC000030,FreshMart Esch-sur-Alzette,5411,Luxembourg,Esch-sur-Alzette
+MRC000031,Differdange Supermarket,5411,Luxembourg,Differdange
+MRC000032,FreshMart Basel,5411,Switzerland,Basel
+MRC000033,MarketPlus Basel,5411,Switzerland,Basel
+MRC000034,FreshMart Arlon,5411,Belgium,Arlon
+MRC000035,GreenFood Arlon,5411,Belgium,Arlon
+MRC000036,GreenFood Esch-sur-Alzette,5411,Luxembourg,Esch-sur-Alzette
+MRC000037,FreshMart Thionville,5411,France,Thionville
+MRC000038,Arlon Supermarket,5411,Belgium,Arlon
+MRC000039,Trier Supermarket,5411,Germany,Trier
+MRC000040,Differdange Bistro,5812,Luxembourg,Differdange
+MRC000041,Thionville Bistro,5812,France,Thionville
+MRC000042,La Table Trier,5812,Germany,Trier
+MRC000043,Basel Bistro,5812,Switzerland,Basel
+MRC000044,La Table Esch-sur-Alzette,5812,Luxembourg,Esch-sur-Alzette
+MRC000045,La Table Arlon,5812,Belgium,Arlon
+MRC000046,La Table Dudelange,5812,Luxembourg,Dudelange
+MRC000047,Lebanese Kitchen Metz,5812,France,Metz
+MRC000048,La Table Esch-sur-Alzette,5812,Luxembourg,Esch-sur-Alzette
+MRC000049,Saarbrucken Bistro,5812,Germany,Saarbrucken
+MRC000050,La Table Basel,5812,Switzerland,Basel
+MRC000051,La Table Luxembourg,5812,Luxembourg,Luxembourg
+MRC000052,Saarbrucken Bistro,5812,Germany,Saarbrucken
+MRC000053,Trier Restaurant,5812,Germany,Trier
+MRC000054,Basel Restaurant,5812,Switzerland,Basel
+MRC000055,La Table Metz,5812,France,Metz
+MRC000056,Lebanese Kitchen Metz,5812,France,Metz
+MRC000057,Thionville Bistro,5812,France,Thionville
+MRC000058,Luxembourg Restaurant,5812,Luxembourg,Luxembourg
+MRC000059,La Table Esch-sur-Alzette,5812,Luxembourg,Esch-sur-Alzette
+MRC000060,Arlon Restaurant,5812,Belgium,Arlon
+MRC000061,Lebanese Kitchen Differdange,5812,Luxembourg,Differdange
+MRC000062,Esch-sur-Alzette Restaurant,5812,Luxembourg,Esch-sur-Alzette
+MRC000063,Luxembourg Bistro,5812,Luxembourg,Luxembourg
+MRC000064,Differdange Restaurant,5812,Luxembourg,Differdange
+MRC000065,Dudelange Restaurant,5812,Luxembourg,Dudelange
+MRC000066,Metz Bistro,5812,France,Metz
+MRC000067,Lebanese Kitchen Thionville,5812,France,Thionville
+MRC000068,La Table Differdange,5812,Luxembourg,Differdange
+MRC000069,QuickBite Luxembourg,5814,Luxembourg,Luxembourg
+MRC000070,QuickBite Luxembourg,5814,Luxembourg,Luxembourg
+MRC000071,Burger Point Arlon,5814,Belgium,Arlon
+MRC000072,QuickBite Differdange,5814,Luxembourg,Differdange
+MRC000073,Dudelange Express,5814,Luxembourg,Dudelange
+MRC000074,QuickBite Basel,5814,Switzerland,Basel
+MRC000075,FastEat Metz,5814,France,Metz
+MRC000076,Burger Point Saarbrucken,5814,Germany,Saarbrucken
+MRC000077,FastEat Differdange,5814,Luxembourg,Differdange
+MRC000078,QuickBite Esch-sur-Alzette,5814,Luxembourg,Esch-sur-Alzette
+MRC000079,Burger Point Esch-sur-Alzette,5814,Luxembourg,Esch-sur-Alzette
+MRC000080,FastEat Differdange,5814,Luxembourg,Differdange
+MRC000081,FastEat Saarbrucken,5814,Germany,Saarbrucken
+MRC000082,FastEat Arlon,5814,Belgium,Arlon
+MRC000083,FastEat Arlon,5814,Belgium,Arlon
+MRC000084,FastEat Differdange,5814,Luxembourg,Differdange
+MRC000085,Burger Point Arlon,5814,Belgium,Arlon
+MRC000086,Burger Point Basel,5814,Switzerland,Basel
+MRC000087,FastEat Dudelange,5814,Luxembourg,Dudelange
+MRC000088,QuickBite Trier,5814,Germany,Trier
+MRC000089,EuroFuel Trier,5542,Germany,Trier
+MRC000090,AutoFuel Differdange,5542,Luxembourg,Differdange
+MRC000091,Arlon Fuel Station,5542,Belgium,Arlon
+MRC000092,EuroFuel Esch-sur-Alzette,5542,Luxembourg,Esch-sur-Alzette
+MRC000093,EuroFuel Arlon,5542,Belgium,Arlon
+MRC000094,PetroLux Basel,5542,Switzerland,Basel
+MRC000095,AutoFuel Luxembourg,5542,Luxembourg,Luxembourg
+MRC000096,PetroLux Saarbrucken,5542,Germany,Saarbrucken
+MRC000097,AutoFuel Esch-sur-Alzette,5542,Luxembourg,Esch-sur-Alzette
+MRC000098,PetroLux Basel,5542,Switzerland,Basel
+MRC000099,Differdange Fuel Station,5542,Luxembourg,Differdange
+MRC000100,Saarbrucken Fuel Station,5542,Germany,Saarbrucken
+MRC000101,PetroLux Trier,5542,Germany,Trier
+MRC000102,EuroFuel Metz,5542,France,Metz
+MRC000103,PetroLux Dudelange,5542,Luxembourg,Dudelange
+MRC000104,AutoFuel Saarbrucken,5542,Germany,Saarbrucken
+MRC000105,EuroFuel Dudelange,5542,Luxembourg,Dudelange
+MRC000106,AutoFuel Metz,5542,France,Metz
+MRC000107,AutoFuel Trier,5542,Germany,Trier
+MRC000108,AutoFuel Arlon,5542,Belgium,Arlon
+MRC000109,CityMall Trier,5311,Germany,Trier
+MRC000110,CityMall Luxembourg,5311,Luxembourg,Luxembourg
+MRC000111,Saarbrucken Department Store,5311,Germany,Saarbrucken
+MRC000112,Metz Department Store,5311,France,Metz
+MRC000113,Metz Department Store,5311,France,Metz
+MRC000114,Luxembourg Department Store,5311,Luxembourg,Luxembourg
+MRC000115,Arlon Department Store,5311,Belgium,Arlon
+MRC000116,Grand Store Saarbrucken,5311,Germany,Saarbrucken
+MRC000117,Grand Store Basel,5311,Switzerland,Basel
+MRC000118,Trier Department Store,5311,Germany,Trier
+MRC000119,Grand Store Saarbrucken,5311,Germany,Saarbrucken
+MRC000120,CityMall Arlon,5311,Belgium,Arlon
+MRC000121,Metz Department Store,5311,France,Metz
+MRC000122,Basel Department Store,5311,Switzerland,Basel
+MRC000123,CityMall Arlon,5311,Belgium,Arlon
+MRC000124,Grand Store Dudelange,5311,Luxembourg,Dudelange
+MRC000125,Digital World Thionville,5732,France,Thionville
+MRC000126,Digital World Arlon,5732,Belgium,Arlon
+MRC000127,Digital World Esch-sur-Alzette,5732,Luxembourg,Esch-sur-Alzette
+MRC000128,TechStore Esch-sur-Alzette,5732,Luxembourg,Esch-sur-Alzette
+MRC000129,TechStore Dudelange,5732,Luxembourg,Dudelange
+MRC000130,TechStore Luxembourg,5732,Luxembourg,Luxembourg
+MRC000131,Digital World Thionville,5732,France,Thionville
+MRC000132,Digital World Metz,5732,France,Metz
+MRC000133,ElectroHub Differdange,5732,Luxembourg,Differdange
+MRC000134,Digital World Esch-sur-Alzette,5732,Luxembourg,Esch-sur-Alzette
+MRC000135,Digital World Arlon,5732,Belgium,Arlon
+MRC000136,Digital World Esch-sur-Alzette,5732,Luxembourg,Esch-sur-Alzette
+MRC000137,UrbanWear Arlon,5651,Belgium,Arlon
+MRC000138,UrbanWear Thionville,5651,France,Thionville
+MRC000139,Arlon Fashion,5651,Belgium,Arlon
+MRC000140,Thionville Fashion,5651,France,Thionville
+MRC000141,UrbanWear Trier,5651,Germany,Trier
+MRC000142,Trier Fashion,5651,Germany,Trier
+MRC000143,Dudelange Fashion,5651,Luxembourg,Dudelange
+MRC000144,StyleHouse Arlon,5651,Belgium,Arlon
+MRC000145,Dudelange Fashion,5651,Luxembourg,Dudelange
+MRC000146,StyleHouse Dudelange,5651,Luxembourg,Dudelange
+MRC000147,UrbanWear Saarbrucken,5651,Germany,Saarbrucken
+MRC000148,StyleHouse Luxembourg,5651,Luxembourg,Luxembourg
+MRC000149,MediCare Metz,5912,France,Metz
+MRC000150,HealthPlus Basel,5912,Switzerland,Basel
+MRC000151,HealthPlus Saarbrucken,5912,Germany,Saarbrucken
+MRC000152,MediCare Metz,5912,France,Metz
+MRC000153,Thionville Pharmacy,5912,France,Thionville
+MRC000154,Thionville Pharmacy,5912,France,Thionville
+MRC000155,MediCare Metz,5912,France,Metz
+MRC000156,MediCare Differdange,5912,Luxembourg,Differdange
+MRC000157,MediCare Metz,5912,France,Metz
+MRC000158,MediCare Esch-sur-Alzette,5912,Luxembourg,Esch-sur-Alzette
+MRC000159,Thionville Pharmacy,5912,France,Thionville
+MRC000160,HealthPlus Metz,5912,France,Metz
+MRC000161,Saarbrucken Transport Services,4111,Germany,Saarbrucken
+MRC000162,Trier Transport Services,4111,Germany,Trier
+MRC000163,Thionville Mobility,4111,France,Thionville
+MRC000164,Saarbrucken Mobility,4111,Germany,Saarbrucken
+MRC000165,Luxembourg Mobility,4111,Luxembourg,Luxembourg
+MRC000166,Luxembourg Rail,4111,Luxembourg,Luxembourg
+MRC000167,Differdange Transport Services,4111,Luxembourg,Differdange
+MRC000168,Basel Mobility,4111,Switzerland,Basel
+MRC000169,Saarbrucken Mobility,4111,Germany,Saarbrucken
+MRC000170,Differdange Transport Services,4111,Luxembourg,Differdange
+MRC000171,Trier Inn,7011,Germany,Trier
+MRC000172,Metz Inn,7011,France,Metz
+MRC000173,Basel Inn,7011,Switzerland,Basel
+MRC000174,Esch-sur-Alzette Inn,7011,Luxembourg,Esch-sur-Alzette
+MRC000175,Hotel Basel Central,7011,Switzerland,Basel
+MRC000176,Saarbrucken Inn,7011,Germany,Saarbrucken
+MRC000177,Esch-sur-Alzette Inn,7011,Luxembourg,Esch-sur-Alzette
+MRC000178,Grand Hotel Luxembourg,7011,Luxembourg,Luxembourg
+MRC000179,EuroAir,4511,MULTI,ONLINE
+MRC000180,Central Europe Airlines,4511,MULTI,ONLINE
+MRC000181,Central Europe Airlines,4511,MULTI,ONLINE
+MRC000182,EuroAir,4511,MULTI,ONLINE
+MRC000183,Central Europe Airlines,4511,MULTI,ONLINE
+MRC000184,Lux Airways,4511,MULTI,ONLINE
+MRC000185,Business Services Europe,7399,MULTI,ONLINE
+MRC000186,CloudServices EU,7399,MULTI,ONLINE
+MRC000187,CloudServices EU,7399,MULTI,ONLINE
+MRC000188,ProServices Ltd,7399,MULTI,ONLINE
+MRC000189,Business Services Europe,7399,MULTI,ONLINE
+MRC000190,Business Services Europe,7399,MULTI,ONLINE
+MRC000191,Luxembourg Education Services,8299,Luxembourg,Dudelange
+MRC000192,Germany Education Services,8299,Germany,Saarbrucken
+MRC000193,Arlon Training Institute,8299,Belgium,Arlon
+MRC000194,Esch-sur-Alzette Training Institute,8299,Luxembourg,Esch-sur-Alzette
+MRC000195,Thionville Learning Center,8299,France,Thionville
+MRC000196,Thionville Learning Center,8299,France,Thionville
+MRC000197,ATM Thionville,6011,France,Thionville
+MRC000198,BankA ATM Dudelange,6011,Luxembourg,Dudelange
+MRC000199,Online Services Ltd,5967,MULTI,ONLINE
+MRC000200,Online Services Ltd,5967,MULTI,ONLINE
