@@ -1,0 +1,201 @@
+merchant_id,merchant_name,mcc_code,country,city
+MRC000001,Trier Supermarket,5411,Germany,Trier
+MRC000002,GreenFood Trier,5411,Germany,Trier
+MRC000003,MarketPlus Liege,5411,Belgium,Liege
+MRC000004,Diekirch Supermarket,5411,Luxembourg,Diekirch
+MRC000005,FreshMart Ettelbruck,5411,Luxembourg,Ettelbruck
+MRC000006,GreenFood Diekirch,5411,Luxembourg,Diekirch
+MRC000007,Wiltz Supermarket,5411,Luxembourg,Wiltz
+MRC000008,GreenFood Nancy,5411,France,Nancy
+MRC000009,GreenFood Diekirch,5411,Luxembourg,Diekirch
+MRC000010,MarketPlus Basel,5411,Switzerland,Basel
+MRC000011,Nancy Supermarket,5411,France,Nancy
+MRC000012,MarketPlus Nancy,5411,France,Nancy
+MRC000013,Nancy Supermarket,5411,France,Nancy
+MRC000014,MarketPlus Nancy,5411,France,Nancy
+MRC000015,MarketPlus Ettelbruck,5411,Luxembourg,Ettelbruck
+MRC000016,MarketPlus Brussels,5411,Belgium,Brussels
+MRC000017,FreshMart Wiltz,5411,Luxembourg,Wiltz
+MRC000018,MarketPlus Trier,5411,Germany,Trier
+MRC000019,Metz Supermarket,5411,France,Metz
+MRC000020,GreenFood Ettelbruck,5411,Luxembourg,Ettelbruck
+MRC000021,Liege Supermarket,5411,Belgium,Liege
+MRC000022,FreshMart Luxembourg,5411,Luxembourg,Luxembourg
+MRC000023,Basel Supermarket,5411,Switzerland,Basel
+MRC000024,MarketPlus Trier,5411,Germany,Trier
+MRC000025,Metz Supermarket,5411,France,Metz
+MRC000026,FreshMart Liege,5411,Belgium,Liege
+MRC000027,MarketPlus Ettelbruck,5411,Luxembourg,Ettelbruck
+MRC000028,GreenFood Brussels,5411,Belgium,Brussels
+MRC000029,Ettelbruck Supermarket,5411,Luxembourg,Ettelbruck
+MRC000030,Luxembourg Supermarket,5411,Luxembourg,Luxembourg
+MRC000031,Diekirch Supermarket,5411,Luxembourg,Diekirch
+MRC000032,Metz Supermarket,5411,France,Metz
+MRC000033,MarketPlus Wiltz,5411,Luxembourg,Wiltz
+MRC000034,GreenFood Nancy,5411,France,Nancy
+MRC000035,Ettelbruck Supermarket,5411,Luxembourg,Ettelbruck
+MRC000036,FreshMart Diekirch,5411,Luxembourg,Diekirch
+MRC000037,GreenFood Basel,5411,Switzerland,Basel
+MRC000038,MarketPlus Luxembourg,5411,Luxembourg,Luxembourg
+MRC000039,MarketPlus Nancy,5411,France,Nancy
+MRC000040,Wiltz Restaurant,5812,Luxembourg,Wiltz
+MRC000041,Brussels Bistro,5812,Belgium,Brussels
+MRC000042,Indian Kitchen Wiltz,5812,Luxembourg,Wiltz
+MRC000043,Lebanese Kitchen Luxembourg,5812,Luxembourg,Luxembourg
+MRC000044,Mexican Kitchen Diekirch,5812,Luxembourg,Diekirch
+MRC000045,Luxembourg Restaurant,5812,Luxembourg,Luxembourg
+MRC000046,Brussels Restaurant,5812,Belgium,Brussels
+MRC000047,Lebanese Kitchen Diekirch,5812,Luxembourg,Diekirch
+MRC000048,Lebanese Kitchen Wiltz,5812,Luxembourg,Wiltz
+MRC000049,La Table Nancy,5812,France,Nancy
+MRC000050,Italian Kitchen Nancy,5812,France,Nancy
+MRC000051,Brussels Bistro,5812,Belgium,Brussels
+MRC000052,Italian Kitchen Diekirch,5812,Luxembourg,Diekirch
+MRC000053,Diekirch Bistro,5812,Luxembourg,Diekirch
+MRC000054,Diekirch Bistro,5812,Luxembourg,Diekirch
+MRC000055,Luxembourg Restaurant,5812,Luxembourg,Luxembourg
+MRC000056,Indian Kitchen Liege,5812,Belgium,Liege
+MRC000057,Basel Restaurant,5812,Switzerland,Basel
+MRC000058,Ettelbruck Bistro,5812,Luxembourg,Ettelbruck
+MRC000059,La Table Brussels,5812,Belgium,Brussels
+MRC000060,La Table Nancy,5812,France,Nancy
+MRC000061,Indian Kitchen Trier,5812,Germany,Trier
+MRC000062,Lebanese Kitchen Wiltz,5812,Luxembourg,Wiltz
+MRC000063,Basel Restaurant,5812,Switzerland,Basel
+MRC000064,Italian Kitchen Luxembourg,5812,Luxembourg,Luxembourg
+MRC000065,La Table Nancy,5812,France,Nancy
+MRC000066,Brussels Bistro,5812,Belgium,Brussels
+MRC000067,Metz Restaurant,5812,France,Metz
+MRC000068,Diekirch Bistro,5812,Luxembourg,Diekirch
+MRC000069,FastEat Basel,5814,Switzerland,Basel
+MRC000070,FastEat Luxembourg,5814,Luxembourg,Luxembourg
+MRC000071,QuickBite Trier,5814,Germany,Trier
+MRC000072,Burger Point Liege,5814,Belgium,Liege
+MRC000073,QuickBite Ettelbruck,5814,Luxembourg,Ettelbruck
+MRC000074,FastEat Liege,5814,Belgium,Liege
+MRC000075,Ettelbruck Express,5814,Luxembourg,Ettelbruck
+MRC000076,QuickBite Liege,5814,Belgium,Liege
+MRC000077,Burger Point Brussels,5814,Belgium,Brussels
+MRC000078,Nancy Express,5814,France,Nancy
+MRC000079,Burger Point Liege,5814,Belgium,Liege
+MRC000080,Wiltz Express,5814,Luxembourg,Wiltz
+MRC000081,Burger Point Metz,5814,France,Metz
+MRC000082,FastEat Luxembourg,5814,Luxembourg,Luxembourg
+MRC000083,Brussels Express,5814,Belgium,Brussels
+MRC000084,FastEat Metz,5814,France,Metz
+MRC000085,QuickBite Liege,5814,Belgium,Liege
+MRC000086,QuickBite Brussels,5814,Belgium,Brussels
+MRC000087,FastEat Trier,5814,Germany,Trier
+MRC000088,Burger Point Brussels,5814,Belgium,Brussels
+MRC000089,Nancy Fuel Station,5542,France,Nancy
+MRC000090,EuroFuel Brussels,5542,Belgium,Brussels
+MRC000091,Nancy Fuel Station,5542,France,Nancy
+MRC000092,Metz Fuel Station,5542,France,Metz
+MRC000093,EuroFuel Nancy,5542,France,Nancy
+MRC000094,Brussels Fuel Station,5542,Belgium,Brussels
+MRC000095,EuroFuel Basel,5542,Switzerland,Basel
+MRC000096,AutoFuel Diekirch,5542,Luxembourg,Diekirch
+MRC000097,Wiltz Fuel Station,5542,Luxembourg,Wiltz
+MRC000098,EuroFuel Brussels,5542,Belgium,Brussels
+MRC000099,EuroFuel Nancy,5542,France,Nancy
+MRC000100,AutoFuel Trier,5542,Germany,Trier
+MRC000101,Metz Fuel Station,5542,France,Metz
+MRC000102,Liege Fuel Station,5542,Belgium,Liege
+MRC000103,Luxembourg Fuel Station,5542,Luxembourg,Luxembourg
+MRC000104,EuroFuel Ettelbruck,5542,Luxembourg,Ettelbruck
+MRC000105,PetroLux Metz,5542,France,Metz
+MRC000106,PetroLux Ettelbruck,5542,Luxembourg,Ettelbruck
+MRC000107,Metz Fuel Station,5542,France,Metz
+MRC000108,EuroFuel Liege,5542,Belgium,Liege
+MRC000109,Wiltz Department Store,5311,Luxembourg,Wiltz
+MRC000110,CityMall Ettelbruck,5311,Luxembourg,Ettelbruck
+MRC000111,Grand Store Metz,5311,France,Metz
+MRC000112,Grand Store Luxembourg,5311,Luxembourg,Luxembourg
+MRC000113,CityMall Trier,5311,Germany,Trier
+MRC000114,Grand Store Ettelbruck,5311,Luxembourg,Ettelbruck
+MRC000115,Grand Store Brussels,5311,Belgium,Brussels
+MRC000116,CityMall Luxembourg,5311,Luxembourg,Luxembourg
+MRC000117,CityMall Brussels,5311,Belgium,Brussels
+MRC000118,Grand Store Basel,5311,Switzerland,Basel
+MRC000119,Ettelbruck Department Store,5311,Luxembourg,Ettelbruck
+MRC000120,Brussels Department Store,5311,Belgium,Brussels
+MRC000121,CityMall Nancy,5311,France,Nancy
+MRC000122,Grand Store Nancy,5311,France,Nancy
+MRC000123,CityMall Trier,5311,Germany,Trier
+MRC000124,Metz Department Store,5311,France,Metz
+MRC000125,TechStore Basel,5732,Switzerland,Basel
+MRC000126,TechStore Luxembourg,5732,Luxembourg,Luxembourg
+MRC000127,TechStore Nancy,5732,France,Nancy
+MRC000128,TechStore Brussels,5732,Belgium,Brussels
+MRC000129,ElectroHub Brussels,5732,Belgium,Brussels
+MRC000130,Digital World Metz,5732,France,Metz
+MRC000131,TechStore Metz,5732,France,Metz
+MRC000132,TechStore Wiltz,5732,Luxembourg,Wiltz
+MRC000133,ElectroHub Brussels,5732,Belgium,Brussels
+MRC000134,TechStore Diekirch,5732,Luxembourg,Diekirch
+MRC000135,TechStore Ettelbruck,5732,Luxembourg,Ettelbruck
+MRC000136,TechStore Nancy,5732,France,Nancy
+MRC000137,UrbanWear Nancy,5651,France,Nancy
+MRC000138,StyleHouse Brussels,5651,Belgium,Brussels
+MRC000139,UrbanWear Nancy,5651,France,Nancy
+MRC000140,UrbanWear Nancy,5651,France,Nancy
+MRC000141,Diekirch Fashion,5651,Luxembourg,Diekirch
+MRC000142,Luxembourg Fashion,5651,Luxembourg,Luxembourg
+MRC000143,Liege Fashion,5651,Belgium,Liege
+MRC000144,StyleHouse Metz,5651,France,Metz
+MRC000145,StyleHouse Liege,5651,Belgium,Liege
+MRC000146,UrbanWear Diekirch,5651,Luxembourg,Diekirch
+MRC000147,UrbanWear Metz,5651,France,Metz
+MRC000148,StyleHouse Ettelbruck,5651,Luxembourg,Ettelbruck
+MRC000149,HealthPlus Diekirch,5912,Luxembourg,Diekirch
+MRC000150,HealthPlus Wiltz,5912,Luxembourg,Wiltz
+MRC000151,HealthPlus Metz,5912,France,Metz
+MRC000152,Basel Pharmacy,5912,Switzerland,Basel
+MRC000153,HealthPlus Luxembourg,5912,Luxembourg,Luxembourg
+MRC000154,MediCare Liege,5912,Belgium,Liege
+MRC000155,MediCare Nancy,5912,France,Nancy
+MRC000156,MediCare Trier,5912,Germany,Trier
+MRC000157,MediCare Wiltz,5912,Luxembourg,Wiltz
+MRC000158,MediCare Basel,5912,Switzerland,Basel
+MRC000159,Liege Pharmacy,5912,Belgium,Liege
+MRC000160,HealthPlus Brussels,5912,Belgium,Brussels
+MRC000161,Germany Rail,4111,Germany,Trier
+MRC000162,Basel Transport Services,4111,Switzerland,Basel
+MRC000163,Luxembourg Rail,4111,Luxembourg,Luxembourg
+MRC000164,Liege Mobility,4111,Belgium,Liege
+MRC000165,Luxembourg Rail,4111,Luxembourg,Luxembourg
+MRC000166,Brussels Mobility,4111,Belgium,Brussels
+MRC000167,Luxembourg Mobility,4111,Luxembourg,Luxembourg
+MRC000168,Wiltz Transport Services,4111,Luxembourg,Wiltz
+MRC000169,Luxembourg Transport Services,4111,Luxembourg,Luxembourg
+MRC000170,Trier Transport Services,4111,Germany,Trier
+MRC000171,Grand Hotel Brussels,7011,Belgium,Brussels
+MRC000172,Brussels Inn,7011,Belgium,Brussels
+MRC000173,Hotel Luxembourg Central,7011,Luxembourg,Luxembourg
+MRC000174,Grand Hotel Luxembourg,7011,Luxembourg,Luxembourg
+MRC000175,Hotel Basel Central,7011,Switzerland,Basel
+MRC000176,Brussels Inn,7011,Belgium,Brussels
+MRC000177,Hotel Diekirch Central,7011,Luxembourg,Diekirch
+MRC000178,Ettelbruck Inn,7011,Luxembourg,Ettelbruck
+MRC000179,Lux Airways,4511,MULTI,ONLINE
+MRC000180,Lux Airways,4511,MULTI,ONLINE
+MRC000181,EuroAir,4511,MULTI,ONLINE
+MRC000182,EuroAir,4511,MULTI,ONLINE
+MRC000183,EuroAir,4511,MULTI,ONLINE
+MRC000184,EuroAir,4511,MULTI,ONLINE
+MRC000185,CloudServices EU,7399,MULTI,ONLINE
+MRC000186,CloudServices EU,7399,MULTI,ONLINE
+MRC000187,CloudServices EU,7399,MULTI,ONLINE
+MRC000188,Business Services Europe,7399,MULTI,ONLINE
+MRC000189,ProServices Ltd,7399,MULTI,ONLINE
+MRC000190,ProServices Ltd,7399,MULTI,ONLINE
+MRC000191,Basel Training Institute,8299,Switzerland,Basel
+MRC000192,Trier Learning Center,8299,Germany,Trier
+MRC000193,Belgium Education Services,8299,Belgium,Liege
+MRC000194,Belgium Education Services,8299,Belgium,Liege
+MRC000195,Nancy Learning Center,8299,France,Nancy
+MRC000196,France Education Services,8299,France,Metz
+MRC000197,BankB ATM Nancy,6011,France,Nancy
+MRC000198,BankB ATM Diekirch,6011,Luxembourg,Diekirch
+MRC000199,Online Services Ltd,5967,MULTI,ONLINE
+MRC000200,Digital Media Plus,5967,MULTI,ONLINE
