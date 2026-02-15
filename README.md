@@ -15,7 +15,6 @@ It orchestrates ingestion using Azure Data Factory, stores data in Azure Data La
 ## Architecture
 
 ![Architecture Diagram](docs/architecture_diagram.png)
-place photo of the architecture here 
 
 ## Technology Used
 
